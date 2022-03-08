@@ -1,0 +1,187 @@
+
+
+.position-relative {
+    position: relative;
+    background-color: white;
+    text-align: center;
+}
+
+.position-relative section{
+    // background-color: white;
+    height: 600px;
+    #display{
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(150deg, #448830 15%, #2d5a1f 70%, #15300D 94%);
+        overflow: hidden;
+        .pos-1{
+            position: absolute;
+            top: -55px;
+            left: -60px;
+            background-color: #8eb68241;
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+        }
+        .pos-2{
+            position: absolute;
+            top: 160px;
+            left: 60px;
+            background-color: #8eb68241;
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+        }
+        .pos-3{
+            position: absolute;
+            top: 172px;
+            left: 160px;
+            background-color: #8eb68241;
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+        }
+        .pos-4{
+            position: absolute;
+            top: 152px;
+            right: 460px;
+            background-color: #8eb68231;
+            height: 90px;
+            width: 90px;
+            border-radius: 50%;
+        }
+        .pos-5{
+            position: absolute;
+            top: -10px;
+            right: 90px;
+            background-color: #8eb68231;
+            height: 110px;
+            width: 110px;
+            border-radius: 50%;
+        }
+        .pos-6{
+            position: absolute;
+            top: 150px;
+            right: 150px;
+            background-color: #8eb68231;
+            height: 110px;
+            width: 110px;
+            border-radius: 50%;
+        }
+        .pos-7{
+            position: absolute;
+            top: 190px;
+            right: 180px;
+            background-color: #8eb68231;
+            height: 110px;
+            width: 110px;
+            border-radius: 50%;
+        }
+        .pos-8{
+            position: absolute;
+            top: 395px;
+            right: 80px;
+            background-color: #8eb68231;
+            height: 110px;
+            width: 110px;
+            border-radius: 50%;
+        }
+        .pos-9{
+            position: absolute;
+            top: 455px;
+            right: 80px;
+            background-color: #8eb68231;
+            height: 110px;
+            width: 110px;
+            border-radius: 50%;
+        }
+    }
+
+    #skew-seperator{
+        height: 150px;
+        margin-top: -30px;
+        // background-color: #f0f2f5 !important;
+        background-color: #ffffff !important;
+        transform: skew(0deg,-1.5deg);
+    }
+
+    #display-overlay{
+        position: absolute;
+        top: 12%;
+        left: calc((100% - 85%)/ 2);
+        right: calc((100% - 85%)/ 2);
+        margin: 0 auto;
+        width: 100%;
+        z-index: 10;
+    }
+}
+
+#service-section {
+    background-color: #ffffff;
+    margin-top: 5%;
+    padding: 5em;
+    .column-1{
+        border-right: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+    }
+    .column-2{
+        border-left: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+    }
+    .column-3{
+        border-right: 1px solid #eeeeee;
+        border-top: 1px solid #eeeeee;
+    }
+    .column-4{
+        border-left: 1px solid #eeeeee;
+        border-top: 1px solid #eeeeee;
+    }
+    
+    .tile:hover {
+        background: #448830;
+        color: #ffffff;
+        cursor: pointer;
+    }
+}
+
+
+
+#hidden-image {
+    position: relative;
+    z-index: 2;
+}
+
+#hidden-image .section {
+    background-image: url('../../../assets/img/sea-ship.png');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    margin-top: 0;
+    height: 300px;
+    z-index: -1;
+    .display-card {
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        height: 200px;
+    }
+
+}
+
+.display {
+    width: 100%;
+    height: max-content;
+    background: linear-gradient(150deg, #448830 15%, #2d5a1f 70%, #15300D 94%);
+    overflow: hidden;
+    padding: 20% 0; 
+    
+}
+
+.display-overlay{
+    margin: 0 auto;
+    width: 100%;
+    z-index: 10;
+}
