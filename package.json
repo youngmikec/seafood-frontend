@@ -3,14 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "prod": "ng build  --watch --configuration=production",
+    "start": "node server.js",
+    "build": "ng build --output-path build",
+    "heroku-postbuild": "ng build --configuration=production",
+    "prod": "ng build --configuration=production --output-path build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~12.2.12",
+    "@angular/compiler-cli": "~12.2.0",
     "@angular/animations": "~12.2.0",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
@@ -28,7 +31,9 @@
     "ngx-toastr": "^14.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "typescript": "~4.3.5"
+
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.12",
