@@ -6,7 +6,7 @@
     "start": "node server.js",
     "build": "ng build --output-path build",
     "heroku-postbuild": "ng build --configuration=production",
-    "prod": "ng build --configuration=production --output-path dist",
+    "prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
