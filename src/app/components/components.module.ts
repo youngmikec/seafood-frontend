@@ -9,6 +9,7 @@ import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { TableComponent } from './table/table.component';
+import { ModalLargeComponent } from './modal-large/modal-large.component';
 
 
 
@@ -21,6 +22,7 @@ import { TableComponent } from './table/table.component';
     AdminFooterComponent,
     BreadcrumbComponent,
     TableComponent,
+    ModalLargeComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { TableComponent } from './table/table.component';
     AdminFooterComponent,
     BreadcrumbComponent,
     TableComponent,
+    ModalLargeComponent,
   ]
 })
 export class ComponentsModule { }

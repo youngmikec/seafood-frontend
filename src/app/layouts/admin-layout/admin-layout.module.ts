@@ -7,12 +7,14 @@ import { AdminLayoutRoutingModule } from './admin-layout-routing.module';
 import { ComponentsModule } from '../../components/components.module';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { ParcelManagerComponent } from '../../pages/parcel/parcel-manager/parcel-manager.component';
+import { PackageManagerComponent } from '../../pages/package/package-manager/package-manager.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ParcelManagerComponent,
+    PackageManagerComponent,
   ],
   imports: [
     CommonModule,

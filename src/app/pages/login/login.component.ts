@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
-      userType: ['', Validators.required],
+      userType: ['SENDER', Validators.required],
     })
   }
 

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  CURRENT_URL: 'http://localhost:3000/api',
+  // CURRENT_URL: 'http://localhost:3000/api',
+  CURRENT_URL: 'https://seafood-backend.herokuapp.com/api',
 };
 
 /*

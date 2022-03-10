@@ -1,1 +1,160 @@
-<p>parcel-add works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Create Parcel Form</h4>
+                </div>
+                <div class="card-body">
+                    <form class="form" 
+                    [formGroup]="formType === 'create' ? addForm : updateForm " 
+                    (ngSubmit)="formType === 'create' ? onSubmit() : onUpdate() ">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name" class="control-label"><strong>Parcel Name*</strong></label>
+                                    <input type="text" formControlName="name" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="category" class="control-label"><strong>Parcel Category*</strong></label>
+                                    <input type="text" formControlName="category" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="description" class="control-label"><strong>Description*</strong></label>
+                                    <!-- <textarea name="description" id="description" formControlName="description" cols="30" rows="10" class="form-control"></textarea> -->
+                                    <input type="text" class="form-control" formControlName="description">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="senderName" class="control-label"><strong>Sender Name*</strong></label>
+                                    <input type="text" formControlName="senderName" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="senderPhone" class="control-label"><strong>Sender Phone*</strong></label>
+                                    <input type="text" formControlName="senderPhone" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="senderEmail" class="control-label"><strong>Sender Email*</strong></label>
+                                    <input type="email" formControlName="senderEmail" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="recipientName" class="control-label"><strong>Recipient Name*</strong></label>
+                                    <input type="text" formControlName="recipientName" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="recipientPhone" class="control-label"><strong>Recipient Phone*</strong></label>
+                                    <input type="text" formControlName="recipientPhone" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="recipientEmail" class="control-label"><strong>Recipient Email*</strong></label>
+                                    <input type="email" formControlName="recipientEmail" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="quantity" class="control-label"><strong>Quantity*</strong></label>
+                                    <input type="number" formControlName="quantity" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="mass" class="control-label"><strong>Mass*</strong></label>
+                                    <input type="number" formControlName="mass" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="volume" class="control-label"><strong>Volume*</strong></label>
+                                    <input type="number" formControlName="volume" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="worth" class="control-label"><strong>Worth*</strong></label>
+                                    <input type="number" formControlName="worth" class="form-control">
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="isParcelPaid" class="control-label"><strong>Paid?*</strong></label>
+                                    <select name="isParcelPaid" id="isParcelPaid" formControlName="isParcelPaid" class="form-control">
+                                        <option value="">Select Parcel Payment status</option>
+                                        <option value="true">Paid</option>
+                                        <option value="false">Not Paid</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="deliveryAddress" class="control-label"><strong>Delivery Address*</strong></label>
+                                    <input type="text" class="form-control" formControlName="deliveryAddress">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="pickupAddress" class="control-label"><strong>Pickup Address*</strong></label>
+                                    <input type="text" class="form-control" formControlName="pickupAddress">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="identification" class="control-label"><strong>Mode of Identification?*</strong></label>
+                                    <select name="identification" id="identification" formControlName="identification" class="form-control">
+                                        <option value="NATIONAL_ID">National Id</option>
+                                        <option value="DRIVERS_LICENSE">Driver's License</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            
+                            <button type="submit" class="btn btn-block btn-primary" 
+                            [disabled]=" formType === 'create' ? addForm.invalid || loading : updateForm.invalid || loading ">
+                                {{ formType === 'create' ? 'Submit' : 'Save'}}
+                                <img *ngIf="loading" class="pl-3"
+                                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                              </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

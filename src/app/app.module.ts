@@ -23,10 +23,12 @@ import {
   ErrorInterceptor,
   JwtInterceptor,
   TimeoutInterceptor,
-  UploadModalService
+  UploadModalService,
+  ModalService
 } from './services';
 
 import {
+  Packages,
   Parcels
 } from './providers';
 
@@ -58,8 +60,10 @@ import { SignupComponent } from './pages/signup/signup.component';
     ChartsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: 'decreasing',
     }),
   ],
   providers: [
@@ -68,7 +72,8 @@ import { SignupComponent } from './pages/signup/signup.component';
     AuthGuard,
     AuthService,
     EnvService,
-
+    ModalService,
+    
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
@@ -76,7 +81,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     [{ provide: DEFAULT_TIMEOUT, useValue: 60000 }],
 
     UploadModalService,
-    Parcels,
+    Parcels, Packages,
   ],
   bootstrap: [AppComponent]
 })

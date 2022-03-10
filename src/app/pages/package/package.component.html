@@ -7,12 +7,7 @@
               <button (click)="openModalLarge()" rel="tooltip" title="New Record" class="btn btn-primary rounded">
                 <i class="now-ui-icons ui-1_simple-add"></i> Add New
               </button>
-              <div class="pull-right" *ngIf="currentSelectedParcels.length > 0">
-                <button type="button" class="btn btn-md btn-success ">
-                  <i class="now-ui-icons design_app"></i> Package Items
-                </button>
-              </div>
-              <h4>Parcels Today</h4>
+              <h4>Package Records</h4>
               <!-- <p class="text-sm mb-0">
                 <i class="fa fa-check text-info" aria-hidden="true"></i>
                 <span class="font-weight-bold ms-1">30 done</span> this month
@@ -40,9 +35,8 @@
                 <tr>
                   <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     *ngFor="let header of headers">{{ header }}</th> -->
-                  <td></td>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Package Name</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sender</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recipient</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
@@ -52,9 +46,6 @@
               </thead>
               <tbody>
                   <tr *ngFor="let record of currentRecords; let i = index">
-                      <td>
-                        <div *ngIf="record?.status === 'PENDING' "><label class="toggle"><input type="checkbox" value="{{record}}" (change)="onSelectChange(record)"/></label></div>
-                      </td>
                       <td>{{ i + 1 }}</td>
                       <td>{{ record?.name }}</td>
                       <td>{{ record?.senderName }} ({{ record?.senderPhone }})</td>

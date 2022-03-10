@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {ApiResponse, Parcel } from '../models';
+import {ApiResponse, Package } from '../models';
 import { EnvService, ApiService } from '../services';
 
 
@@ -9,8 +9,8 @@ import { EnvService, ApiService } from '../services';
 
 @Injectable()
 
-export class Parcels {
-    parcels: Array<Parcel> = [];
+export class Packages {
+    parcels: Array<Package> = [];
 
     constructor(
         private env: EnvService,
@@ -37,18 +37,18 @@ export class Parcels {
       });
     }
   
-    add(parcel: Parcel) {
+    add(parcel: Package) {
       this.parcels.push(parcel);
     }
   
-    delete(parcel: Parcel) {
+    delete(parcel: Package) {
       this.parcels.splice(this.parcels.indexOf(parcel), 1);
     }
   
     // CRUD Service
     // async recordRetrieve(queryString = '?sort=-createdAt'): Promise<ApiResponse> {
     async recordRetrieve(queryString = '' ): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/parcel${queryString}`;
+      const url = `${this.env.API_URL}/package${queryString}`;
       const proRes = this.apiService.getApi(url).pipe(
         map((res: ApiResponse) => {
           console.log(res);
@@ -65,7 +65,7 @@ export class Parcels {
     }
   
     async recordCreate(data: any): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/parcel`;
+      const url = `${this.env.API_URL}/package`;
       const proRes = this.apiService.postApi(url, data).pipe(
         map((res: ApiResponse) => {
           if (res.success && res.payload) {
@@ -78,7 +78,7 @@ export class Parcels {
       return await proRes.toPromise();
     }
   
-    async recordUpdate(record: Parcel | any, payload: any): Promise<ApiResponse> {
+    async recordUpdate(record: Package | any, payload: any): Promise<ApiResponse> {
       const url = `${this.env.API_URL}/parcel/${record.id}`;
       const proRes = this.apiService.updateApi(url, payload).pipe(
         map((res: ApiResponse) => {
@@ -95,7 +95,7 @@ export class Parcels {
       return await proRes.toPromise();
     }
   
-    async recordDelete(record: Parcel): Promise<ApiResponse> {
+    async recordDelete(record: Package): Promise<ApiResponse> {
       const url = `${this.env.API_URL}/parcel/${record.id}`;
       const proRes = this.apiService.deleteApi(url).pipe(
         map((res: any) => {
