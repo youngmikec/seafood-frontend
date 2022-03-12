@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, Input, OnChanges, ElementRef, Renderer2, SimpleChanges } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+
 import { ModalService } from '../../services';
+
+declare var $:JQueryStatic;
+
 
 @Component({
   selector: 'app-modal-large',
@@ -14,15 +16,14 @@ export class ModalLargeComponent implements OnInit, OnChanges {
   state: boolean = false;
 
   constructor(
-    private modalService: ModalService,
-    private elementRef: ElementRef,
-    private renderer: Renderer2
+    private modalServices: ModalService,
+
   ) {
     
    }
 
   ngOnInit(): void {
-    this.modalService.getModalState().subscribe({
+    this.modalServices.getModalState().subscribe({
       next: (res: boolean) => {
         this.state = res;
         this.toggleModal();
@@ -41,36 +42,36 @@ export class ModalLargeComponent implements OnInit, OnChanges {
       // this.currentWalletDeposit = record;
       // console.log('[Current Edit Record] ', this.currentWalletDeposit);
       // this.loadedStatus = record.isLoaded ? 'Not Loaded' : 'Loaded';
-      // const deleteModal =  $(`#modalLarge`);
-      const deleteModal =  this.modal?.nativeElement;
-      console.log('modal', deleteModal);
-      this.renderer.setAttribute(deleteModal, 'aria-modal', 'true');
-      this.renderer.removeAttribute(deleteModal, 'aria-hidden');
-      this.renderer.addClass(deleteModal, 'show');
-      // deleteModal.attr('aria-modal', 'true');
-      // deleteModal.removeAttr('aria-hidden');
-      // deleteModal.addClass('show');
+      // const deleteModal =  this.modal?.nativeElement;
+      // console.log('modal', deleteModal);
+      // this.renderer.setAttribute(deleteModal, 'aria-modal', 'true');
+      // this.renderer.removeAttribute(deleteModal, 'aria-hidden');
+      // this.renderer.addClass(deleteModal, 'show');
+      const deleteModal =  $(`#modalLarge`);
+      deleteModal.attr('aria-modal', 'true');
+      deleteModal.removeAttr('aria-hidden');
+      deleteModal.addClass('show');
     }else{
-      // const deleteModal =  $(`#modalLarge`);
-      // deleteModal.attr('aria-hidden', 'true');
-      // deleteModal.removeAttr('aria-modal');
-      // deleteModal.removeClass('show');
-      const deleteModal =  this.modal?.nativeElement;
-      this.renderer.setAttribute(deleteModal, 'aria-hidden', 'true');
-      this.renderer.removeAttribute(deleteModal, 'aria-modal');
-      this.renderer.removeChild(deleteModal, 'show');
+      const deleteModal =  $(`#modalLarge`);
+      deleteModal.attr('aria-hidden', 'true');
+      deleteModal.removeAttr('aria-modal');
+      deleteModal.removeClass('show');
+      // const deleteModal =  this.modal?.nativeElement;
+      // this.renderer.setAttribute(deleteModal, 'aria-hidden', 'true');
+      // this.renderer.removeAttribute(deleteModal, 'aria-modal');
+      // this.renderer.removeChild(deleteModal, 'show');
     }
   }
 
   closeModal(): void {
-    this.modalService.setModalState(false);
+    this.modalServices.setModalState(false);
     // this.toggleModal();
   }
 
   openModal(record: any = null): void {
-    this.modalService.setModalState(true);
-    
+    this.modalServices.setModalState(true);
   }
+
 
   /**
    * @description "Handle close modal"

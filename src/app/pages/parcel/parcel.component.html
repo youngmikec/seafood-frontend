@@ -4,13 +4,18 @@
         <div class="card-header pb-0">
           <div class="row">
             <div class="col-lg-6 col-7">
-              <button (click)="openModalLarge()" rel="tooltip" title="New Record" class="btn btn-primary rounded">
-                <i class="now-ui-icons ui-1_simple-add"></i> Add New
-              </button>
-              <div class="pull-right" *ngIf="currentSelectedParcels.length > 0">
-                <button type="button" class="btn btn-md btn-success ">
-                  <i class="now-ui-icons design_app"></i> Package Items
-                </button>
+              <div class="d-flex">
+                <!-- <button rel="tooltip" title="New Record" class="btn btn-primary rounded flex-1 mr-3">
+                  <i class="now-ui-icons ui-1_simple-add"></i> Add New
+                </button> -->
+
+                <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openXl('xl', 'parcel', content)">Add New</button>
+
+                <div class="push-right ml-3" *ngIf="currentSelectedParcels.length > 0">
+                  <button type="button" class="btn btn-md btn-success rounded flex-1" (click)="openXl('xl', 'package', content)">
+                    <i class="now-ui-icons design_app"></i> Package Items
+                  </button>
+                </div>
               </div>
               <h4>Parcels Today</h4>
               <!-- <p class="text-sm mb-0">
@@ -73,7 +78,167 @@
 </div>
 
 
-<app-modal-large [headerTitle]="'Job Creation Form'">
-  <!-- <app-parcel-add [record]="currentRecord" [formType]="sidebarContent">
-  </app-parcel-add> -->
-</app-modal-large>
+<ng-template #content let-modal>
+  <div class="modal-header container">
+    <h4 class="modal-title">{{ modalType === 'parcel' ? 'Parcel Add Form' : 'Package Form' }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="modalType === 'parcel'">
+      <app-parcel-add [record]="currentRecord" [formType]="sidebarContent">
+      </app-parcel-add>
+    </div>
+
+    <div *ngIf="modalType === 'package'">
+      <form [formGroup]="packageForm" (ngSubmit)="createPackage()">
+        <div>
+          <span class="m-2">{{ currentSelectedParcels.length }} items</span>
+          <span class="m-2"><small>{{ totalAmount }}</small></span>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="name" class="control-label"><strong>Package Name*</strong></label>
+                  <input type="text" formControlName="name" class="form-control">
+              </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="name" class="control-label"><strong>Amount Payable*</strong></label>
+                  <input type="number" formControlName="amountPayable" class="form-control">
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="senderName" class="control-label"><strong>Sender Name*</strong></label>
+                  <input type="text" formControlName="senderName" class="form-control">
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="senderPhone" class="control-label"><strong>Sender Phone*</strong></label>
+                  <input type="text" formControlName="senderPhone" class="form-control">
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="senderEmail" class="control-label"><strong>Sender Email*</strong></label>
+                  <input type="email" formControlName="senderEmail" class="form-control">
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="recipientName" class="control-label"><strong>Recipient Name*</strong></label>
+                  <input type="text" formControlName="recipientName" class="form-control">
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="recipientPhone" class="control-label"><strong>Recipient Phone*</strong></label>
+                  <input type="text" formControlName="recipientPhone" class="form-control">
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="recipientEmail" class="control-label"><strong>Recipient Email*</strong></label>
+                <input type="email" formControlName="recipientEmail" class="form-control">
+            </div>
+        </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="deliveryAddress" class="control-label"><strong>Delivery Address*</strong></label>
+                <input type="text" class="form-control" formControlName="deliveryAddress">
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                  <label for="pickupAddress" class="control-label"><strong>Pickup Address*</strong></label>
+                  <input type="text" class="form-control" formControlName="pickupAddress">
+              </div>
+          </div>
+
+          
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="paymentMethod" class="control-label"><strong>Payment Method*</strong></label>
+                <select name="paymentMethod" [(ngModel)]="paymentMethod" id="paymentMethod" formControlName="paymentMethod" class="form-control">
+                    <option value="">Select payment method</option>
+                    <option value="CASH">CASH</option>
+                    <option value="GATEWAY">GATEWAY</option>
+                    <option value="TRANSFER">TRANSFER</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group" *ngIf="paymentMethod === 'GATEWAY' ">
+                <label for="paymentGateway" class="control-label"><strong>Payment Gateway*</strong></label>
+                <select name="paymentGateway" id="paymentGateway" formControlName="paymentGateway" class="form-control">
+                    <option value="">Select Payment Gateway</option>
+                    <option value="PAYSTACK">PAYSTACK</option>
+                    <option value="FLUTTERWAVE">FLUTTERWAVE</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="paymentStatus" class="control-label"><strong>Payment Status*</strong></label>
+                <select name="paymentStatus" id="paymentStatus" formControlName="paymentStatus" class="form-control">
+                    <option value="">Select Payment Gateway</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="SUCCESS">SUCCESSFUL</option>
+                    <option value="FAIL">FAIL</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="isCheckedOut" class="control-label"><strong>Is CheckOut?*</strong></label>
+                <select name="isCheckedOut" id="isCheckedOut" formControlName="isCheckedOut" class="form-control">
+                    <option value="">Select Parcel Payment status</option>
+                    <option value="true">Paid</option>
+                    <option value="false">Not Paid</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="form-group">
+              <label for="remark" class="control-label"><strong>Remark*</strong></label>
+              <input type="text" class="form-control" formControlName="remark">
+          </div>
+        </div> 
+
+
+
+      </div>
+      <div class="form-group">  
+          <button type="submit" class="btn btn-block btn-primary" (click)="createPackage()"
+          [disabled]=" packageForm.invalid || packaging ">
+              Submit
+              <img *ngIf="loading" class="pl-3"
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </button>
+      </div>
+      </form>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

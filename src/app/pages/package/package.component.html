@@ -4,9 +4,7 @@
         <div class="card-header pb-0">
           <div class="row">
             <div class="col-lg-6 col-7">
-              <button (click)="openModalLarge()" rel="tooltip" title="New Record" class="btn btn-primary rounded">
-                <i class="now-ui-icons ui-1_simple-add"></i> Add New
-              </button>
+              <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openXl('lg', content)">Add New</button>
               <h4>Package Records</h4>
               <!-- <p class="text-sm mb-0">
                 <i class="fa fa-check text-info" aria-hidden="true"></i>
@@ -36,6 +34,7 @@
                   <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     *ngFor="let header of headers">{{ header }}</th> -->
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Package Code</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Package Name</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sender</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recipient</th>
@@ -47,6 +46,7 @@
               <tbody>
                   <tr *ngFor="let record of currentRecords; let i = index">
                       <td>{{ i + 1 }}</td>
+                      <td>{{ record?.code }}</td>
                       <td>{{ record?.name }}</td>
                       <td>{{ record?.senderName }} ({{ record?.senderPhone }})</td>
                       <td>{{ record?.recipientName }} ({{ record?.recipientPhone }})</td>
@@ -63,8 +63,16 @@
     </div>
 </div>
 
-
-<app-modal-large [headerTitle]="'Job Creation Form'">
-  <!-- <app-parcel-add [record]="currentRecord" [formType]="sidebarContent">
-  </app-parcel-add> -->
-</app-modal-large>
+<ng-template #content let-modal>
+  <div class="modal-header container">
+    <h4 class="modal-title">Package Add Form</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <!-- <app-package-add [record]="currentRecord" [formType]="sidebarContent">
+    </app-package-add> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

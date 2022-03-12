@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { Package } from '../../models';
 import { Packages } from '../../providers';
-import { ModalService } from '../../services';
 
 @Component({
   selector: 'app-package',
@@ -27,7 +27,7 @@ export class PackageComponent implements OnInit {
   constructor(
     private packages: Packages,
     private toastr: ToastrService,
-    private modalService: ModalService
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -48,11 +48,8 @@ export class PackageComponent implements OnInit {
     });
   }
 
-
-  openModalLarge(type: string = 'create', record: Package | null = null): void {
-    this.modalService.setModalState(true);
-    this.sidebarContent = type === 'create' ? type : 'edit' ;
-    this.currentRecord = record ? record : null;
+  openXl(size: string = 'xl', content: any = ''): void {
+    this.modalService.open(content, { size: size });
   }
 
   showNotification(message: string) {

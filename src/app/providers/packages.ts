@@ -77,6 +77,20 @@ export class Packages {
         }));
       return await proRes.toPromise();
     }
+
+    async AdminRecordCreate(data: any): Promise<ApiResponse> {
+      const url = `${this.env.API_URL}/package/admin`;
+      const proRes = this.apiService.postApi(url, data).pipe(
+        map((res: ApiResponse) => {
+          if (res.success && res.payload) {
+            console.log('recordCreate() successful');
+          } else {
+            throwError(res.message);
+          }
+          return res;
+        }));
+      return await proRes.toPromise();
+    }
   
     async recordUpdate(record: Package | any, payload: any): Promise<ApiResponse> {
       const url = `${this.env.API_URL}/parcel/${record.id}`;
