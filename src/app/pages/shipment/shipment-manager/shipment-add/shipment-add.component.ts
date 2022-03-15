@@ -130,19 +130,15 @@ export class ShipmentAddComponent implements OnInit {
   onUpdate(){
     this.loading = true;
     const payload = this.updateForm.value;
-    payload.packages = this.packagesArray.length > 0 ? this.packagesArray : [];
+    console.log(payload.packages);
+    payload.packages = payload.packages.length > 0 ? payload.packages.map((item: any) => item.id) : [];
     payload.isVehicleFull = payload.isVehicleFull === 'true' || true ? true : false;
     payload.locationFrom = {address: payload.locationFrom, coordinates: [32.3242, 65.7564]}
     payload.destination = {address: payload.destination, coordinates: [32.3242, 65.7564]}
     payload.currentLocation = {address: payload.currentLocation, coordinates: [32.3242, 65.7564]}
 
-    if(this.addForm.invalid){
-      this.showNotification('Fill in all the required inputs');
-    }
-
     this.shipments.recordUpdate(this.record, payload).then(res => {
       if(res.success){
-        this.addForm.reset();
         this.changed.emit(true);
         this.showNotification(res.message);
       }

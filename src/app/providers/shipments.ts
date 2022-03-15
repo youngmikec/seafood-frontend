@@ -85,7 +85,7 @@ export class Shipments {
           if (res.success) {
             this.delete(record);
             this.recordRetrieve().then(res =>{
-                this.shipments = res.payload;
+              this.shipments = res.payload;
             })
           } else {
             throwError(res.message);
