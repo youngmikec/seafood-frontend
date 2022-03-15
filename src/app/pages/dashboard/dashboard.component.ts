@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 
+import { Parcel, Shipment, User } from '../../models';
+import { Parcels, Shipments, Users } from '../../providers'
+
 
 
 @Component({
@@ -26,9 +29,16 @@ export class DashboardComponent implements OnInit {
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
     // = document.getElementById("chart-bars").getContext("2d");
+  
+  parcelsArray: Array<Parcel> = [];
+  usersArray: Array<User> = [];
+  shipmentsArray: Array<Shipment> = [];
 
   constructor(
     private eleRef: ElementRef,
+    private users: Users,
+    private parcels: Parcels,
+    private shipments: Shipments
   ) {
     this.ctx = this.eleRef.nativeElement
    }
@@ -36,9 +46,39 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     // this.ctx.getContext("2d");
     // this.createChart(this.ctx, "bar", []);
+    this.getAllRecords();
 
   }
 
+  getAllRecords(): void {
+    this.getUsers();
+    this.getParcels();
+    this.getShipments();
+  }
+  
+  getParcels(): void {
+    this.parcels.recordRetrieve().then(res => {
+      if(res.success){
+        this.parcelsArray = res.payload;
+      }
+    }).catch(err => console.log(err));
+  }
+
+  getShipments(): void {
+    this.shipments.recordRetrieve().then(res => {
+      if(res.success){
+        this.shipmentsArray = res.payload;
+      }
+    }).catch(err => console.log(err));
+  }
+
+  getUsers(): void {
+    this.users.recordRetrieve().then(res => {
+      if(res.success){
+        this.usersArray = res.payload;
+      }
+    }).catch(err => console.log(err));
+  }
   // createChart(ctx: any, type: string | any = "bar", data: Array<object> = []){
   //   this.chart = new Chart('canvas', {
   //     type: type,

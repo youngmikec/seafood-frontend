@@ -1,0 +1,163 @@
+<div class="row mb-4 mt-4">
+    <div class="col-lg-12 col-md-12 col-xs-12 mb-md-0 mb-4">
+      <div class="card">
+        <div class="card-header pb-0">
+          <div class="row">
+            <div class="col-lg-6 col-7">
+              <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openModal('lg', 'create', content)">Add New</button>
+              <h4>Shipment Records</h4>
+              <!-- <p class="text-sm mb-0">
+                <i class="fa fa-check text-info" aria-hidden="true"></i>
+                <span class="font-weight-bold ms-1">30 done</span> this month
+              </p> -->
+            </div>
+            <div class="col-lg-6 col-5 my-auto text-end">
+              <div class="dropdown float-lg-end pe-4">
+                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-ellipsis-v text-secondary"></i>
+                </a>
+                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
+                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
+                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body px-0 pb-2">
+          <div class="container-fluid">
+            <app-table>
+              <thead>
+                <tr>
+                  <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    *ngFor="let header of headers">{{ header }}</th> -->
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Shipment Code</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Packages</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pickup Location</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delivery Location</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created On</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let record of currentRecords; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ record?.code }}</td>
+                      <td class="text-primary"><a href="javascript:void(0)" (click)="openModal('lg', 'peep', content, record)">{{ record?.packages?.length }} Packages</a></td>
+                      <td>{{ record?.locationFrom?.address }}</td>
+                      <td>{{ record?.destination?.address }}</td>
+                      <td>{{ record?.status }}</td>
+                      <td>{{ record?.createdAt | date }}</td>
+                      <td>
+                        <!-- <div class="col-lg-6 col-5 my-auto text-end">
+                          <div class="dropdown float-lg-end pe-4">
+                            <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa fa-ellipsis-v text-secondary"></i>
+                            </a>
+                            <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                              <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
+                              <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
+                              <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
+                            </ul>
+                          </div>
+                        </div> -->
+                        <div class="dropdown show">
+                          <a class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-secondary"></i>
+                          </a>
+                        
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" (click)="openViewModal(record)">View</a>
+                            <a class="dropdown-item" (click)="openModal('lg', 'edit', content, record)">Edit</a>
+                            <a class="dropdown-item" (click)="openModal('lg', 'delete', content, record)">Delete</a>
+                          </div>
+                        </div>
+                      </td>
+                  </tr>
+              </tbody>
+            </app-table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header container">
+    <h4 class="modal-title">{{ formType === 'peep' ? 'Package Peep Modal' : 'Shipment Modal' }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+        <div id="shipment-form" 
+          *ngIf="formType === 'create' ||
+          formType === 'edit' "
+        >
+            <app-shipment-add [packageRecords]="returnedPackages" [formType]="formType" [record]="currentRecord" (changed)="getRecords()"></app-shipment-add>
+        </div>
+
+        <div id="peep-modal" *ngIf="formType === 'peep' ">
+            <div class="container rounded shadow-sm card" *ngFor="let package of currentRecord.packages">
+                <div class="card-body d-flex justify-content-between">
+                    <div class="flex">
+                        <h6>Package Code</h6>
+                        <p><small>{{ package?.code }}</small></p>
+                    </div>
+                    
+                    <div class="flex">
+                        <h6>Package Name</h6>
+                        <p><small>{{ package?.name }}</small></p>
+                    </div>
+                    
+                    <div class="flex">
+                        <h6>Pickup Address</h6>
+                        <p><small>{{ package?.pickupAddress }}</small></p>
+                    </div>
+                    
+                    <div class="flex">
+                        <h6>Delivery Address</h6>
+                        <p><small>{{ package?.deliveryAddress }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="delete-modal" *ngIf="formType === 'delete' ">
+          <div class="container rounded shadow-sm card">
+            <div class="card-body d-flex justify-content-between">
+                <div class="flex">
+                    <h6>Shipment Code</h6>
+                    <p><small>{{ currentRecord?.code }}</small></p>
+                </div>
+                
+                <div class="flex">
+                    <h6>No of Packages</h6>
+                    <p><small>{{ currentRecord?.packages?.length }}</small></p>
+                </div>
+                
+                <div class="flex">
+                    <h6>Originating Address</h6>
+                    <p><small>{{ currentRecord?.locationFrom?.address }}</small></p>
+                </div>
+                
+                <div class="flex">
+                    <h6>Destination Address</h6>
+                    <p><small>{{ currentRecord?.destination?.address }}</small></p>
+                </div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <button class="btn btn-block btn-danger" (click)="deleteRecord(currentRecord)">
+              Delete
+            </button>
+          </div>
+        </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

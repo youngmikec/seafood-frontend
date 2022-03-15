@@ -18,6 +18,7 @@ export class ParcelComponent implements OnInit {
   closeResult: string = '';
   loading: boolean = false;
   packaging: boolean = false;
+  deleting: boolean = false;
   currentRecord: Parcel | null = null;
   currentRecords: Array<Parcel> = [];
   headers: Array<string> = ['S/N', 'Name'];
@@ -115,6 +116,7 @@ export class ParcelComponent implements OnInit {
         this.showNotification(res.message);
         this.packageForm.reset();
         this.getRecords();
+        
       }
     }).catch(err => this.showNotification(err))
     .finally(() => { this.packaging = false });
@@ -123,6 +125,46 @@ export class ParcelComponent implements OnInit {
   openXl(size: string = 'xl', type: string = 'parcel', content: any = ''): void {
     this.modalType = type;
     this.modalService.open(content, { size: size });
+  }
+
+  openModal(size: string = 'xl', type: string, content: any = '', record: any = null): void {
+    switch (type) {
+      case 'parcel':
+        this.modalType = type;
+        this.currentRecord = record;
+        break;
+      case 'package':
+        this.modalType = type;
+        this.currentRecord = record;
+        break;
+      case "peep": 
+        this.modalType = type;
+        this.currentRecord = record;
+        break;
+      case "delete": 
+        this.modalType = type;
+        this.currentRecord = record;
+        break;
+      default:
+        this.modalType = 'create';
+        this.currentRecord = record;
+    }
+    this.modalService.open(content, { size: size });
+  }
+
+  deleteRecord(record: Parcel | any){
+    this.deleting = true;
+    this.parcels.recordDelete(record).then(res => {
+      if(res.success){
+        this.currentRecord = null;
+        this.getRecords();
+        this.showNotification(res.message);
+      }
+    }).catch(err => {
+      this.showNotification(err);
+    }).finally(() => {
+      this.deleting = false;
+    })
   }
 
   showNotification(message: string) {

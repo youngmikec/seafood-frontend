@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from '../../services';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { ParcelManagerComponent } from '../../pages/parcel/parcel-manager/parcel-manager.component';
 import { PackageManagerComponent } from '../../pages/package/package-manager/package-manager.component';
-import { AuthGuard } from '../../services';
+import { ShipmentManagerComponent } from '../../pages/shipment/shipment-manager/shipment-manager.component';
 
 const routes: Routes = [
   { path: '**', redirectTo: 'home' },
@@ -18,8 +19,11 @@ const routes: Routes = [
   { path: 'package',    component: PackageManagerComponent, 
     children: [{ path: '',   loadChildren: () => import('../../pages/package/package.module').then(m => m.PackageModule)}]
   },
+
+  { path: 'shipment',    component: ShipmentManagerComponent, 
+    children: [{ path: '',   loadChildren: () => import('../../pages/shipment/shipment.module').then(m => m.ShipmentModule)}]
+  },
   
-  { path: 'package', loadChildren: () => import('../../pages/package/package.module').then(m => m.PackageModule) },
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {ApiResponse, Package } from '../models';
+import {ApiResponse, User } from '../models';
 import { EnvService, ApiService } from '../services';
 
 
@@ -9,8 +9,8 @@ import { EnvService, ApiService } from '../services';
 
 @Injectable()
 
-export class Packages {
-    parcels: Array<Package> = [];
+export class Users {
+    shipments: Array<User> = [];
 
     constructor(
         private env: EnvService,
@@ -19,9 +19,9 @@ export class Packages {
   
     query(params?: any) {
       if (!params) {
-        return this.parcels;
+        return this.shipments;
       }
-      return this.parcels.filter((parcel) => {
+      return this.shipments.filter((parcel) => {
         for (const key in params) {
           if (params.hasOwnProperty(key)) {
             //@ts-ignore
@@ -37,18 +37,18 @@ export class Packages {
       });
     }
   
-    add(parcel: Package) {
-      this.parcels.push(parcel);
+    add(parcel: User) {
+      this.shipments.push(parcel);
     }
   
-    delete(parcel: Package) {
-      this.parcels.splice(this.parcels.indexOf(parcel), 1);
+    delete(parcel: User) {
+      this.shipments.splice(this.shipments.indexOf(parcel), 1);
     }
   
     // CRUD Service
     // async recordRetrieve(queryString = '?sort=-createdAt'): Promise<ApiResponse> {
     async recordRetrieve(queryString = '' ): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/package${queryString}`;
+      const url = `${this.env.API_URL}/user${queryString}`;
       const proRes = this.apiService.getApi(url).pipe(
         map((res: ApiResponse) => {
           console.log(res);
@@ -65,21 +65,7 @@ export class Packages {
     }
   
     async recordCreate(data: any): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/package`;
-      const proRes = this.apiService.postApi(url, data).pipe(
-        map((res: ApiResponse) => {
-          if (res.success && res.payload) {
-            console.log('recordCreate() successful');
-          } else {
-            throwError(res.message);
-          }
-          return res;
-        }));
-      return await proRes.toPromise();
-    }
-
-    async AdminRecordCreate(data: any): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/package/admin`;
+      const url = `${this.env.API_URL}/user`;
       const proRes = this.apiService.postApi(url, data).pipe(
         map((res: ApiResponse) => {
           if (res.success && res.payload) {
@@ -92,14 +78,14 @@ export class Packages {
       return await proRes.toPromise();
     }
   
-    async recordUpdate(record: Package | any, payload: any): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/package/${record.id}`;
+    async recordUpdate(record: User | any, payload: any): Promise<ApiResponse> {
+      const url = `${this.env.API_URL}/user/${record.id}`;
       const proRes = this.apiService.updateApi(url, payload).pipe(
         map((res: ApiResponse) => {
           if (res.success) {
             this.delete(record);
             this.recordRetrieve().then(res =>{
-                this.parcels = res.payload;
+                this.shipments = res.payload;
             })
           } else {
             throwError(res.message);
@@ -109,8 +95,8 @@ export class Packages {
       return await proRes.toPromise();
     }
   
-    async recordDelete(record: Package): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/package/${record.id}`;
+    async recordDelete(record: User | any): Promise<ApiResponse> {
+      const url = `${this.env.API_URL}/user/${record.id}`;
       const proRes = this.apiService.deleteApi(url).pipe(
         map((res: any) => {
           if (res.success) {

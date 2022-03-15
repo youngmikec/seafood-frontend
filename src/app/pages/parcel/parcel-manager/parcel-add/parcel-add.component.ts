@@ -38,13 +38,14 @@ export class ParcelAddComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if(this.formType !== 'create' && this.record){
+    if(this.formType == 'edit' && this.record){
+      console.log(this.formType);
       this.setUpdateForm();
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.formType !== 'create' && this.record){
+    if(this.formType == 'edit' && this.record){
       this.setUpdateForm();
     } 
   }

@@ -70,11 +70,11 @@ export class AuthService {
 
 
   showNotification(message: string | undefined) {
-    this.toastr.show(`<span class="fa ui-1_bell-53"></span> <b>${message}</b>`, '', {
+    this.toastr.show(`<span class="now-ui-icons ui-1_bell-53"></span> <b>${message}</b>`, '', {
       timeOut: 8000,
       closeButton: true,
       enableHtml: true,
-      toastClass: 'alert alert-primary alert-with-icon',
+      toastClass: 'alert alert-success alert-with-icon',
     });
   }
 

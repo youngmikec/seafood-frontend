@@ -9,10 +9,10 @@
                   <i class="now-ui-icons ui-1_simple-add"></i> Add New
                 </button> -->
 
-                <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openXl('xl', 'parcel', content)">Add New</button>
+                <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openModal('xl', 'create', content)">Add New</button>
 
                 <div class="push-right ml-3" *ngIf="currentSelectedParcels.length > 0">
-                  <button type="button" class="btn btn-md btn-success rounded flex-1" (click)="openXl('xl', 'package', content)">
+                  <button type="button" class="btn btn-md btn-success rounded flex-1" (click)="openModal('xl', 'package', content)">
                     <i class="now-ui-icons design_app"></i> Package Items
                   </button>
                 </div>
@@ -47,12 +47,12 @@
                     *ngFor="let header of headers">{{ header }}</th> -->
                   <td></td>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sender</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recipient</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created On</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sender</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recipient</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created On</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,7 +66,19 @@
                       <td>{{ record?.recipientName }} ({{ record?.recipientPhone }})</td>
                       <td>{{ record?.status }}</td>
                       <td>{{ record?.createdAt | date }}</td>
-                      <td></td>
+                      <td>
+                        <div class="dropdown show">
+                          <a class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-secondary"></i>
+                          </a>
+                        
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" (click)="openModal('lg', 'edit', content, record)">View</a>
+                            <a class="dropdown-item" (click)="openModal('xl', 'edit', content, record)">Edit</a>
+                            <a class="dropdown-item" (click)="openModal('lg', 'delete', content, record)">Delete</a>
+                          </div>
+                        </div>
+                      </td>
                   </tr>
               </tbody>
             </app-table>
@@ -80,12 +92,16 @@
 
 <ng-template #content let-modal>
   <div class="modal-header container">
-    <h4 class="modal-title">{{ modalType === 'parcel' ? 'Parcel Add Form' : 'Package Form' }}</h4>
+    <h4 class="modal-title">
+      <span *ngIf="modalType === 'create' || modalType === 'edit' ">Parcel Modal</span>
+      <span *ngIf="modalType === 'package'">Package Modal</span>
+      <span *ngIf="modalType === 'delete'">Delete Modal</span>
+    </h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
   </div>
   <div class="modal-body">
-    <div *ngIf="modalType === 'parcel'">
-      <app-parcel-add [record]="currentRecord" [formType]="sidebarContent">
+    <div *ngIf="modalType === 'create' || modalType === 'edit' ">
+      <app-parcel-add [record]="currentRecord" [formType]="modalType" (changed)="getRecords()">
       </app-parcel-add>
     </div>
 
@@ -236,6 +252,43 @@
       </form>
     </div>
 
+    <div id="delete-modal" *ngIf="modalType === 'delete' ">
+      <div class="container rounded shadow-sm card">
+        <div class="card-header">
+          <h4 class="card-title">Are you sure you want to delete the record below?</h4>
+        </div>
+        <div class="card-body d-flex justify-content-between">
+            <div class="flex">
+                <h6>Parcel Code</h6>
+                <p><small>{{ currentRecord?.code }}</small></p>
+            </div>
+            
+            <div class="flex">
+                <h6>Worth</h6>
+                <p><small>{{ currentRecord?.worth }}</small></p>
+            </div>
+            
+            <div class="flex">
+                <h6>Sender's Info</h6>
+                <p><small>{{ currentRecord?.senderName }} ({{ currentRecord?.senderPhone }})</small></p>
+            </div>
+            
+            <div class="flex">
+                <h6>Recipient's Info</h6>
+                <p><small>{{ currentRecord?.recipientName }} ({{ currentRecord?.recipientPhone }})</small></p>
+            </div>
+        </div>
+      </div>
+      <div class="mt-5">
+        <button class="btn btn-block btn-danger" (click)="deleteRecord(currentRecord)">
+          <span *ngIf="deleting" style="font-size: 10px;">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </span>
+          <span *ngIf="!deleting">Delete</span>
+        </button>
+      </div>
+    </div>
 
   </div>
   <div class="modal-footer">

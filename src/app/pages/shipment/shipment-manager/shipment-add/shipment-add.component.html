@@ -1,0 +1,152 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Shipment Form</h4>
+                </div>
+                <div class="card-body">
+                    <form class="form" [formGroup]="formType === 'create' ? addForm : updateForm " 
+                    (ngSubmit)="formType === 'create' ? onSubmit() : onUpdate()">
+                        
+                        <div class="row">
+                          <div class="col-lg-6 col-md-6 col-sm-12">
+                              <div class="form-group">
+                                  <label for="packages" class="control-label"><strong>Packages*</strong></label>
+                                  <!-- <input type="text" formControlName="packages" class="form-control"> -->
+                                  <ng-select 
+                                    class="form-control"
+                                    bindValue="id"
+                                    bindLabel="name"
+                                    formControlName="packages"
+                                    [items]="packageRecords" 
+                                    [virtualScroll]="true"
+                                    (change)="addToPackagesArray($event)"
+                                    ></ng-select>
+                              </div>
+                          </div>
+                
+                          <div class="col-lg-4 col-md-6 col-sm-12">
+                              <div class="form-group">
+                                  <label for="courierName" class="control-label"><strong>Courier Name*</strong></label>
+                                  <input type="text" formControlName="courierName" class="form-control">
+                              </div>
+                          </div>
+                
+                          <div class="col-lg-4 col-md-6 col-sm-12">
+                              <div class="form-group">
+                                  <label for="courierPhone" class="control-label"><strong>Courier Phone*</strong></label>
+                                  <input type="text" formControlName="courierPhone" class="form-control">
+                              </div>
+                          </div>
+                
+                        
+                          
+                
+                          <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="locationFrom" class="control-label"><strong>Location From*</strong></label>
+                                <input type="text" class="form-control" formControlName="locationFrom">
+                            </div>
+                          </div>
+                
+                          <div class="col-lg-6 col-md-6 col-sm-12">
+                              <div class="form-group">
+                                  <label for="destination" class="control-label"><strong>Destination*</strong></label>
+                                  <input type="text" class="form-control" formControlName="destination">
+                              </div>
+                          </div>
+
+                          <div class="col-lg-6 col-md-6 col-sm-12">
+                              <div class="form-group">
+                                  <label for="currentLocation" class="control-label"><strong>Current Location*</strong></label>
+                                  <input type="text" class="form-control" formControlName="currentLocation">
+                              </div>
+                          </div>
+
+                          <div class="col-lg-6 col-md-6 col-sm-12">
+                              <div class="form-group">
+                                  <label for="departureDate" class="control-label"><strong>Departure Date*</strong></label>
+                                  <input type="date" class="form-control" formControlName="departureDate">
+                              </div>
+                          </div>
+
+                          <div class="col-lg-6 col-md-6 col-sm-12">
+                              <div class="form-group">
+                                  <label for="expectedDate" class="control-label"><strong>Excepted Date*</strong></label>
+                                  <input type="date" class="form-control" formControlName="expectedDate">
+                              </div>
+                          </div>
+                
+                          
+                        
+                
+                
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="vehicleType" class="control-label"><strong>Vehicle Type*</strong></label>
+                                <select name="vehicleType" id="vehicleType" formControlName="vehicleType" class="form-control">
+                                    <option value="">Select Shipment Vehicle</option>
+                                    <option value="BUS">BUS</option>
+                                    <option value="SHIP">SHIP</option>
+                                    <option value="AIRCRAFT">AIRCRAFT</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label for="vehicleDetail" class="control-label"><strong>Vehicle Detail*</strong></label>
+                                <input type="text" class="form-control" formControlName="vehicleDetail">
+                            </div>
+                          </div> 
+                
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="isVehicleFull" class="control-label"><strong>Is Vehicle Full?*</strong></label>
+                                <select name="isVehicleFull" id="isVehicleFull" formControlName="isVehicleFull" class="form-control">
+                                    <option value="">Select Parcel Payment status</option>
+                                    <option value="true">Full</option>
+                                    <option value="false">Not Full</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="status" class="control-label"><strong>Shipment Status*</strong></label>
+                                <select name="status" id="status" formControlName="status" class="form-control">
+                                    <option value="">Select Shipment status</option>
+                                    <option value="LOADING">LOADING</option>
+                                    <option value="DEPARTED">DEPARTED</option>
+                                    <option value="ARRIVED">ARRIVED</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                
+                
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div class="form-group">
+                              <label for="remark" class="control-label"><strong>Remark*</strong></label>
+                              <input type="text" class="form-control" formControlName="remark">
+                          </div>
+                        </div> 
+                
+                
+                
+                      </div>
+                      <div class="form-group">  
+                          <button type="submit" class="btn btn-block btn-primary" (click)="formType === 'create' ? onSubmit() : onUpdate()"
+                          [disabled]=" formType === 'create' ? addForm.invalid || loading : updateForm.invalid || loading ">
+                          {{ formType === 'create' ? 'Submit' : 'Save'}}
+                              <img *ngIf="loading" class="pl-3"
+                                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            </button>
+                      </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

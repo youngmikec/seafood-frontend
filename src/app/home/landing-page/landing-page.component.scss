@@ -173,10 +173,11 @@
 
 .display {
     width: 100%;
-    height: max-content;
+    // height: max-content;
+    height: 400px;
     background: linear-gradient(150deg, #448830 15%, #2d5a1f 70%, #15300D 94%);
     overflow: hidden;
-    padding: 20% 0; 
+    padding: 5em 0; 
     
 }
 

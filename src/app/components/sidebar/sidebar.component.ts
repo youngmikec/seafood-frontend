@@ -26,6 +26,13 @@ export const ROUTES: RouteInfo[] = [
       { path: '/crm/mail', title: 'Mail', icon: 'users_single-02', class: '' },
     ]
   },
+
+  {
+    path: '/admin/shipment', title: 'Shipment', icon: 'ui-1_email-85', class: 'parent-nav',
+    sub: [
+      { path: '/crm/mail', title: 'Mail', icon: 'users_single-02', class: '' },
+    ]
+  },
   
 
   // {
