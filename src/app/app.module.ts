@@ -26,7 +26,8 @@ import {
   JwtInterceptor,
   TimeoutInterceptor,
   UploadModalService,
-  ModalService
+  ModalService,
+  MapService
 } from './services';
 
 import {
@@ -79,6 +80,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     AuthGuard,
     AuthService,
     EnvService,
+    MapService,
     ModalService,
     
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

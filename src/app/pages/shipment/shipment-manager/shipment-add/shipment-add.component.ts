@@ -130,7 +130,6 @@ export class ShipmentAddComponent implements OnInit {
   onUpdate(){
     this.loading = true;
     const payload = this.updateForm.value;
-    console.log(payload.packages);
     payload.packages = payload.packages.length > 0 ? payload.packages.map((item: any) => item.id) : [];
     payload.isVehicleFull = payload.isVehicleFull === 'true' || true ? true : false;
     payload.locationFrom = {address: payload.locationFrom, coordinates: [32.3242, 65.7564]}

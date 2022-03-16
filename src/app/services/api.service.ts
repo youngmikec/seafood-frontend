@@ -9,7 +9,7 @@ import { cleanObject } from '../helpers';
 const API_ACCESS_KEY = 'jeNeSais-pas';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  headers: new HttpHeaders({'Content-Type': 'application/json', Accept: "application/json"}),
   // params: new HttpParams({ fromString: `apiKey=${API_ACCESS_KEY}` }) 
 };
 

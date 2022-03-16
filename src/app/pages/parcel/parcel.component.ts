@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Parcel } from '../../models';
 import { Parcels, Packages } from '../../providers';
+import { MapService } from '../../services';
 
 @Component({
   selector: 'app-parcel',
@@ -35,6 +36,7 @@ export class ParcelComponent implements OnInit {
     private parcels: Parcels,
     private packages: Packages,
     private toastr: ToastrService,
+    private mapService: MapService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
   ) {
@@ -43,6 +45,7 @@ export class ParcelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecords();
+    this.getGeoCoding("47 Ezuth street Emene Enugu state");
   }
 
   createPackageForm(): void {
@@ -64,6 +67,7 @@ export class ParcelComponent implements OnInit {
       isCheckedOut: ['', Validators.required],
     })
   }
+  
   getRecords(){
     this.loading = true;
     this.parcels.recordRetrieve().then((res: any) => {
@@ -125,6 +129,26 @@ export class ParcelComponent implements OnInit {
   openXl(size: string = 'xl', type: string = 'parcel', content: any = ''): void {
     this.modalType = type;
     this.modalService.open(content, { size: size });
+  }
+
+  getGeoCoding(address: string){
+    const query = `&address=${address}`;
+    this.mapService.geoCoding(query).subscribe({
+      next: (res: any) => {
+        console.log(res)
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  getReverseGeoCoding(coordinates: string){
+    this.mapService.reverseGeoCoding(coordinates).subscribe({
+      next: (res: any) => {
+        console.log(res)
+      }
+    })
   }
 
   openModal(size: string = 'xl', type: string, content: any = '', record: any = null): void {
