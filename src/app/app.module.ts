@@ -8,7 +8,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ChartsModule } from 'ng2-charts';
 import { ToastrModule } from 'ngx-toastr';
 
 
@@ -64,7 +63,6 @@ import { SignupComponent } from './pages/signup/signup.component';
     ReactiveFormsModule,
     HttpClientModule,
     ComponentsModule,
-    ChartsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-top-right',
