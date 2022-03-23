@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -112,6 +113,24 @@ export class ShipmentComponent implements OnInit {
     }).finally(() => {
       this.deleting = false;
     })
+  }
+
+  operateShipment(record: Shipment, action: string): void {
+    let operationObject: any = {
+      remark: 'Okay'
+    };
+    if(action == 'depart'){
+      operationObject.status = 'DEPARTED';
+    }
+    if(action == 'arrive'){
+      operationObject.status = 'ARRIVED';
+    }
+
+    this.shipments.shipmentOperation(record, operationObject).then((res) => {
+      if(res.success){
+        this.showNotification(res.message);
+      }
+    }).catch((err: any) => this.showNotification(err));
   }
 
   showNotification(message: string) {

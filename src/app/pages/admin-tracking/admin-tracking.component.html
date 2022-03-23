@@ -1,0 +1,124 @@
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3 text-start">
+            <div class="nav-wrapper position-relative end-0">
+              <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link mb-0 px-0 py-1" routerLink="/admin/tracking" routerLinkActive="active bg-gradient-primary" data-bs-toggle="tab" role="tab" aria-selected="true">
+                    <i class="material-icons text-lg position-relative">home</i>
+                    <span class="ms-1">Tracking</span>
+                  </a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link mb-0 px-0 py-1" routerLink="/admin/shipment/add" routerLinkActive="active bg-gradient-primary" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                    <i class="material-icons text-lg position-relative">email</i>
+                    <span class="ms-1">Shipment Add</span>
+                  </a>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+    </div>
+    
+    <!-- Tracking Input -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <form [formGroup]="trackingForm" (ngSubmit)="onSubmit()">
+                        <input type="text" class="w-75" formControlName="trackingCode" placeholder="tracking code">
+                        <span class="ml-5 mt-3 btn btn-sm btn-primary" (click)="onSubmit()">Track</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- tracking record lists -->
+    <div class="row" *ngIf="currentRecords.length > 0">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                  <app-table>
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tracking Code</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Current Location</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let record of currentRecords; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ record?.trackingCode }}</td>
+                            <td>
+                              {{ record?.shipment?.currentLocation?.address }}
+                            </td>
+                            <td>
+                              <div class="dropdown show">
+                                <a class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fa fa-ellipsis-v text-secondary"></i>
+                                </a>
+                              
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                  <!-- <a class="dropdown-item" (click)="openModal('lg', 'edit', content, record)">View</a>
+                                  <a class="dropdown-item" (click)="openModal('xl', 'edit', content, record)">Edit</a>
+                                  <a class="dropdown-item" (click)="openModal('lg', 'delete', content, record)">Delete</a> -->
+                                  <a class="dropdown-item">Delete</a>
+                                </div>
+                              </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </app-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button #modalButton style="display: none;" (click)="openModal('lg', content)"></button>
+
+<ng-template #content let-modal>
+  <div class="modal-header container">
+    <h4 class="modal-title">Tracking Modal</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+
+        <div id="peep-modal">
+            <div class="container rounded shadow-sm card my-2">
+                <div class="card-body d-flex justify-content-between">
+                    <div class="flex">
+                        <h6>Tracking Code</h6>
+                        <p><small>{{ currentRecord?.result?.trackingCode }}</small></p>
+                    </div>
+                    
+                    <div class="flex">
+                        <h6>Current Location</h6>
+                        <p><small>{{ currentRecord?.trackingDetail?.currentLocation?.address }}</small></p>
+                    </div>
+
+                    <div class="flex">
+                        <h6>Current Location Coordinates</h6>
+                        <p><small>Latitude: {{ currentRecord?.trackingDetail?.currentLocation?.coordinates[0] }}</small></p>
+                        <p><small>Longitude: {{ currentRecord?.trackingDetail?.currentLocation?.coordinates[1] }}</small></p>
+                    </div>
+                    
+                    <div class="flex">
+                        <h6>Shipment Status</h6>
+                        <p><small>{{ currentRecord?.trackingDetail?.status }}</small></p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

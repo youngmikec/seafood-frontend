@@ -40,6 +40,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delivery Location</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created On</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                 </tr>
               </thead>
@@ -52,6 +53,21 @@
                       <td>{{ record?.destination?.address }}</td>
                       <td>{{ record?.status }}</td>
                       <td>{{ record?.createdAt | date }}</td>
+                      <td>
+                        <button class="btn btn-sm btn-primary" 
+                        *ngIf="record.status === 'LOADING' "
+                        (click)="operateShipment(record, 'depart')"
+                        >
+                          Depart
+                        </button>
+
+                        <button class="btn btn-sm btn-primary" 
+                        *ngIf="record.status === 'DEPARTED' "
+                        (click)="operateShipment(record, 'arrive')"
+                        >
+                          Arrive
+                        </button>
+                      </td>
                       <td>
                         <div class="dropdown show">
                           <a class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,7 +105,7 @@
         </div>
 
         <div id="peep-modal" *ngIf="formType === 'peep' ">
-            <div class="container rounded shadow-sm card" *ngFor="let package of currentRecord.packages">
+            <div class="container rounded shadow-sm card my-2" *ngFor="let package of currentRecord.packages">
                 <div class="card-body d-flex justify-content-between">
                     <div class="flex">
                         <h6>Package Code</h6>

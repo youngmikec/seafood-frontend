@@ -48,8 +48,8 @@
                   <td></td>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sender</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recipient</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Worth</th>
+                  <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recipient</th> -->
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created On</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
@@ -62,8 +62,8 @@
                       </td>
                       <td>{{ i + 1 }}</td>
                       <td>{{ record?.name }}</td>
-                      <td>{{ record?.senderName }} ({{ record?.senderPhone }})</td>
-                      <td>{{ record?.recipientName }} ({{ record?.recipientPhone }})</td>
+                      <td>{{ record?.worth | currency: 'NGN' : 'symbol-narrow' : '4.2-2' }}</td>
+                      <!-- <td>{{ record?.recipientName }} ({{ record?.recipientPhone }})</td> -->
                       <td>{{ record?.status }}</td>
                       <td>{{ record?.createdAt | date }}</td>
                       <td>
@@ -107,9 +107,9 @@
 
     <div *ngIf="modalType === 'package'">
       <form [formGroup]="packageForm" (ngSubmit)="createPackage()">
-        <div>
-          <span class="m-2">{{ currentSelectedParcels.length }} items</span>
-          <span class="m-2"><small>{{ totalAmount }}</small></span>
+        <div class="alert alert-success">
+          <span class="m-2"><small>Number of Items: </small> <strong>{{ currentSelectedParcels.length }}</strong></span>
+          <span class="m-2"><small>Suggested Amount to Pay: </small> <strong>{{ totalAmount }}</strong></span>
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">

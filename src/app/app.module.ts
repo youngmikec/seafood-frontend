@@ -33,6 +33,7 @@ import {
   Packages,
   Parcels,
   Shipments,
+  Trackings,
   Users
 } from './providers';
 
@@ -88,7 +89,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     [{ provide: DEFAULT_TIMEOUT, useValue: 60000 }],
 
     UploadModalService,
-    Parcels, Packages, Shipments, Users
+    Parcels, Packages, Shipments, Users, Trackings
   ],
   bootstrap: [AppComponent]
 })

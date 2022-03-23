@@ -9,11 +9,12 @@ import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { ParcelManagerComponent } from '../../pages/parcel/parcel-manager/parcel-manager.component';
 import { PackageManagerComponent } from '../../pages/package/package-manager/package-manager.component';
 import { ShipmentManagerComponent } from '../../pages/shipment/shipment-manager/shipment-manager.component';
-import { ShipmentModule } from '../../pages/shipment/shipment.module';
+import { AdminTrackingComponent } from 'src/app/pages/admin-tracking/admin-tracking.component';
 
 
 @NgModule({
   declarations: [
+    AdminTrackingComponent,
     DashboardComponent,
     ParcelManagerComponent,
     PackageManagerComponent,

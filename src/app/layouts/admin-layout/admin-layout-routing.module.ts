@@ -6,6 +6,7 @@ import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { ParcelManagerComponent } from '../../pages/parcel/parcel-manager/parcel-manager.component';
 import { PackageManagerComponent } from '../../pages/package/package-manager/package-manager.component';
 import { ShipmentManagerComponent } from '../../pages/shipment/shipment-manager/shipment-manager.component';
+import { AdminTrackingComponent } from '../../pages/admin-tracking/admin-tracking.component';
 
 const routes: Routes = [
   { path: '**', redirectTo: 'home' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'shipment',    component: ShipmentManagerComponent, 
     children: [{ path: '',   loadChildren: () => import('../../pages/shipment/shipment.module').then(m => m.ShipmentModule)}]
   },
+  { path: 'tracking',    component: AdminTrackingComponent },
   
 ];
 
