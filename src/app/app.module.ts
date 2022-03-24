@@ -42,6 +42,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LandingPageComponent } from './home/landing-page/landing-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { RegisterItemComponent } from './home/register-item/register-item.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     LandingPageComponent,
     LoginComponent,
     SignupComponent,
+    RegisterItemComponent,
   ],
   imports: [
     CommonModule,
