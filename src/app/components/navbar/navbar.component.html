@@ -37,9 +37,17 @@
         </li>
         <li>
           <a *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-sm btn-outline-info rounded mt-2">Sign In/Sign Up</a>
-          <a *ngIf="isAuthenticated" class="">
-            <span class="mx-3">{{ user?.surname }} {{ user?.firstName }}</span>
-            <img [src]="user?.image || defaultAvatar" class="rounded-circle" width="40rem"  alt="">
+          <a *ngIf="isAuthenticated" class="dropdown show">
+            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="mx-3">{{ user?.surname }} {{ user?.firstName }}</span>
+              <img [src]="user?.image || defaultAvatar" class="rounded-circle" width="40rem"  alt="">
+            </a>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profile</a>
+              <a class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >Transactions</a>
+              <a class="dropdown-item" (click)="logout()">Log out</a>
+            </div>
           </a>
         </li>
       </ul>
