@@ -16,42 +16,228 @@
     <div class="col-12">
         <div class="card mx-auto w-50">
             <div class="card-body">
-                <div class="text-center">
+                <div class="">
                     <div class="container">
-                        <div class="card">
-                            <div class="card-header py-2 bg-gray-200">
-                                <h5 class="card-title">Sender's Info</h5>
+                        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+                            <!--Step 1-->
+                            <div *ngIf="currentStep === 1">
+                                <div class="card">
+                                    <div class="card-header py-2 bg-gray-100">
+                                        <h5 class="card-title">Package Info</h5>
+                                    </div>
+                                    
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Name</label>
+                                            <input type="text" class="form-control" formControlName="name" placeholder="package name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pickupAddress" class="control-label">Pickup Address</label>
+                                            <input type="text" class="form-control" formControlName="pickupAddress" placeholder="pickup address">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="deliveryAddress" class="control-label">Delivery Address</label>
+                                            <input type="text" class="form-control" formControlName="deliveryAddress" placeholder="delivery address">
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="incrementCounter()">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <input type="text" class="form-control" placeholder="Sender's Name">
-                                <input type="text" class="form-control" placeholder="Sender's Email">
-                                <input type="text" class="form-control" placeholder="Sender's Phone">
-                            </div>
-                        </div>
+    
+                            <!--Step 2-->
+                            <div *ngIf="currentStep == 2">
+                                <div class="card">
+                                    <div class="card-header py-2 bg-gray-100">
+                                        <h5 class="card-title">Sender's Info</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="senderName" class="control-label">Sender Name</label>
+                                            <input type="text" class="form-control" formControlName="senderName" required="true" placeholder="Sender's name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="senderPhone" class="control-label">Sender Phone</label>
+                                            <input type="text" class="form-control" formControlName="senderPhone" required="true" placeholder="+23409858">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="senderEmail" class="control-label">Sender Email</label>
+                                            <input type="email" class="form-control" formControlName="senderEmail" required="true" placeholder="example@gmail.com">
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <br>
+                                <br>
+                                <div class="card">
+                                    <div class="card-header py-2 bg-gray-100">
+                                        <h5 class="card-title">Recipients's Info</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="recipientName" class="control-label">Recipient Name</label>
+                                            <input type="text" class="form-control" formControlName="recipientName" required="true" placeholder="Recipient's name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="recipientPhone" class="control-label">Recipient Phone</label>
+                                            <input type="text" class="form-control" formControlName="recipientPhone" required="true" placeholder="+23409858">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="recipientEmail" class="control-label">Recipient Email</label>
+                                            <input type="email" class="form-control" formControlName="recipientEmail" required="true" placeholder="example@gmail.com">
+                                        </div>
 
-                        <br>
-                        <br>
-                        <div class="card">
-                            <div class="card-header py-2 bg-gray-200">
-                                <h5 class="card-title">Recipients's Info</h5>
+                                        <br>
+                                        <div class="form-group text-center">
+                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2" (click)="decreaseCounter()">BAck</button>
+                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="incrementCounter()">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <input type="text" class="form-control" placeholder="Recipient's Name">
-                                <input type="text" class="form-control" placeholder="Recipient's Email">
-                                <input type="text" class="form-control" placeholder="Recipient's Phone">
+    
+                            <!--Step 3-->
+                            <div *ngIf="currentStep == 3">
+                                <div class="card">
+                                    <div class="card-header py-2 bg-gray-100">
+                                        <h5 class="card-title">Item Info</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form [formGroup]="parcelForm">
+                                            <div class="form-group">
+                                                <label for="name" class="control-label">Item Name</label>
+                                                <input type="text" class="form-control" formControlName="name" required="true" placeholder="">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="description" class="control-label">Item description</label>
+                                                <input type="text" class="form-control" formControlName="description" required="true" placeholder="More detail about the item">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="category" class="control-label">Category</label>
+                                                <select name="category" id="category" formControlName="category" class="form-control">
+                                                    <option value="SEAFOOD">Seafood</option>
+                                                    <option value="HOME-APPLIANCES">Home Applicances</option>
+                                                    <option value="ELECTRONICS">Electronics</option>
+                                                    <option value="FURNITURE">Furniture</option>
+                                                    <option value="VEHICLE-AND-PARTS">Vehicle and parts</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="quantity" class="control-label">Quantity</label>
+                                                <input type="number" class="form-control" formControlName="quantity" required="true">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="mass" class="control-label">Mass</label>
+                                                <input type="number" class="form-control" formControlName="mass" required="true">
+                                            </div>
+    
+                                            <div class="form-group">
+                                                <label for="volume" class="control-label">Volume</label>
+                                                <input type="number" class="form-control" formControlName="volume" required="true">
+                                            </div>
+    
+                                            <div class="form-group">
+                                                <label for="worth" class="control-label">Item Worth (price in Naira)</label>
+                                                <input type="number" class="form-control" formControlName="worth" required="true">
+                                            </div>
+    
+                                            <div class="form-group">
+                                                <label for="identification" class="control-label">Method to identify Recipient</label>
+                                                <select name="identification" id="identification" formControlName="identification" class="form-control">
+                                                    <option value="NATIONAL_ID">National Id</option>
+                                                    <option value="DRIVERS_LICENSE">Driver's License</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group text-center">
+                                                <button class="btn btn-lg bg-dark text-white mx-2" (click)="createAndAddParcel($event)">
+                                                    {{ parcelsArray.length > 0 ? 'Add another item' : 'Add Item'}}
+                                                </button>
+                                            </div>
+
+                                        </form>
+
+                                        <br>
+                                        <div class="form-group text-center">
+                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2" (click)="decreaseCounter()">BAck</button>
+                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="incrementCounter()">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+    
+                            <!--Step 4-->
+                            <div *ngIf="currentStep == 4">
+                                <div class="card">
+                                    <div class="card-header py-2 bg-gray-100">
+                                        <h5 class="card-title">Payment Info</h5>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="alert alert-success" *ngIf="parcelsArray.length > 0">
+                                            <span class="m-2"><small>Number of Items: </small> <strong>{{ parcelsArray.length }}</strong></span>
+                                            <span class="m-2"><small>Suggested Amount to Pay: </small> <strong>{{ totalAmount }}</strong></span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="amountPayable" class="control-label">Total Amount</label>
+                                            <input type="number" class="form-control" formControlName="amountPayable" ng-disabled="disabled" required="true" placeholder="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="paymentMethod" class="control-label">Payment Method</label>
+                                            <select name="paymentMethod" id="paymentMethod" formControlName="paymentMethod" class="form-control">
+                                                <option value="CASH">Cash</option>
+                                                <!-- <option value="GATEWAY">Payment gateway</option> -->
+                                                <option value="WALLET">Wallet</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="paymentStatus" class="control-label">Payment Status</label>
+                                            <select name="paymentStatus" id="paymentStatus" formControlName="paymentStatus" class="form-control">
+                                                <option value="PENDING">Pending</option>
+                                                <option value="SUCCESS">Successful</option>
+                                                <option value="FAIL">Failed</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="remark" class="control-label">Remark</label>
+                                            <input type="text" class="form-control" formControlName="remark" required="true">
+                                        </div>
+
+
+                                        <br>
+                                        <div class="form-group text-center">
+                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2" (click)="decreaseCounter()">BAck</button>
+                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="onSubmit()">Finish</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+
                     </div>
 
-                    <div class="my-4">
+                        
+
+                    <!-- <div class="my-4">
                         <button class="btn btn-lg bg-dark text-white">
                             Submit
                         </button>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
+        
+        
     </div>
 </div>
 

@@ -55,7 +55,7 @@ export class ShipmentComponent implements OnInit {
   }
 
   getAvailablePackages(){
-    const queryString = '';
+    const queryString = `?filter={"status": [{"PENDING"}]}`;
     this.packages.recordRetrieve().then(res => {
       if(res.success){
         this.returnedPackages = res.payload;

@@ -1,9 +1,9 @@
 import { Gender, UserType } from './enum';
 
 export interface User {
-    id?:              string;
-    _id?:             string;
-    title?:           string;
+   id?:               string;
+   _id?:              string;
+   title?:            string;
    userType?:         UserType; 
    surname?:          string;
    firstName?:        string;
@@ -21,6 +21,7 @@ export interface User {
    email?:            string;
    phone?:            string;
    phone2?:           string;
+   image?:            string;
    kin?:              string;
    kinPhone?:         string;
    kinAddress?:       string;
@@ -52,9 +53,9 @@ export interface User {
 
 
 export class User {
-    id?:              string;
-    _id?:             string;
-    title?:           string;
+   id?:               string;
+   _id?:              string;
+   title?:            string;
    userType?:         UserType; 
    surname?:          string;
    firstName?:        string;
@@ -72,6 +73,7 @@ export class User {
    email?:            string;
    phone?:            string;
    phone2?:           string;
+   image?:            string;
    kin?:              string;
    kinPhone?:         string;
    kinAddress?:       string;

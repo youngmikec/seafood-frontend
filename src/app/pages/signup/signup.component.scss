@@ -1,0 +1,25 @@
+#background {
+    // background-image: url('../../../assets/img/background-svg.jpg');
+    // background-position: center center;
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    background-color: rgb(253, 253, 253);
+}
+.card {
+    border: none;
+}
+.form-control {
+    border: 1px solid #C7D2EA;
+    background-color: #ffffff !important;
+    border-radius: 3px;
+}
+.form-control:hover {
+    background-color: #e6eaf2;
+    border: 1px solid #778DBD;
+    box-shadow: none;
+}
+.form-control:focus {
+    background-color: #B5BDCA;
+    border: 1px solid #778DBD;
+    box-shadow: none;
+}

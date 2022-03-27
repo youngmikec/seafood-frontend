@@ -154,6 +154,15 @@
     z-index: 2;
 }
 
+#rounded-image {
+    background-image: url('../../../assets/img/delivery-mobile.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    // background-attachment: fixed;
+
+}
+
 #hidden-image .section {
     background-image: url('../../../assets/img/sea-ship.png');
     background-position: center center;

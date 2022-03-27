@@ -29,14 +29,7 @@
                             </h1>
                             <p class="lead text-white" style="font-weight: 500;"> We give true definition of seamless service. </p>
                             <br>
-                                <div class="card">
-                                    <div class="card-header p-0">
-                                        <form [formGroup]="trackingForm" (ngSubmit)="onSubmit()">
-                                            <input type="text" class="w-75" formControlName="trackingCode" placeholder="Input tracking code">
-                                            <span class="ml-3 mt-3 btn btn-md btn-primary" (click)="onSubmit()">Search</span>
-                                        </form>
-                                    </div>
-                                </div>
+                                <app-tracking (changed)="setCurrentRecord($event)"></app-tracking>
                             <br>
                             <br>
                         </div>
@@ -50,21 +43,6 @@
         </section>
     </div>
 
-    <!-- <section id="service-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="text-center">
-                        <div>
-                            <span>
-
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
     <div id="service-section" >
         <div class="section" id="details">
             <div class="container">
@@ -163,10 +141,12 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6 col-sm-7 col-xs-12">
-                          <img src="../../../assets/img/apps.jpg" style="border-radius: 10px;" height="350em" width="200em" class="phone1" id="parallax-1" alt="alt image">
-                          <img src="assets/img/samsung.png" class="phone2" id="parallax-2" alt="alt image">
-                        </div> -->
+
+                        <div class="col-lg-6 col-sm-7 col-xs-0 d-flex justify-content-end">
+                            <div id="rounded-image" class="w-75 rounded-circle bg-white mt-n5" style="height: 22rem; box-shadow: 3px 3px 5px 0 white;"></div>
+                          <!-- <img src="../../../assets/img/delivery-mobile.jpg" style="border-radius: 10px;" height="350em" width="200em" class="phone1" id="parallax-1" alt="alt image"> -->
+                          <!-- <img src="assets/img/samsung.png" class="phone2" id="parallax-2" alt="alt image"> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,7 +167,7 @@
     
             <div class="col-md-4 text-center">
               <div class="px-4">
-                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/drake.jpg"><div class="pt-0 text-center">
+                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/michael_c.jpeg"><div class="pt-0 text-center">
                   <h5 class="title mt-3">
                     <span class="d-block mb-1">Ozor Michael</span>
                     <small class="h6 text-muted">
@@ -201,7 +181,7 @@
     
             <div class="col-md-4 text-center">
               <div class="px-4">
-                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/drake.jpg"><div class="pt-0 text-center">
+                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/marie.jpg"><div class="pt-0 text-center">
                   <h5 class="title mt-3">
                     <span class="d-block mb-1">Josh Franklin</span>
                     <small class="h6 text-muted"> "Great! Used this for a client already and he is over the moon. Keep up the good work Creative Tim! 10/10 for design, colours, and the feel of the kit."
@@ -213,7 +193,7 @@
     
             <div class="col-md-4 text-center">
               <div class="px-4">
-                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/drake.jpg"><div class="pt-0 text-center">
+                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/team-2.jpg"><div class="pt-0 text-center">
                   <h5 class="title mt-3">
                     <span class="d-block mb-1">Michael Onubogu</span>
                     <small class="h6 text-muted"> "Damn Daniel!!! This Design System is fresh AF! Amazing work!"</small>

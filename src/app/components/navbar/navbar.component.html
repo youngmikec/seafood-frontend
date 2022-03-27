@@ -36,7 +36,11 @@
           <a href="/">Our Services</a>
         </li>
         <li>
-          <a routerLink="/login" class="btn btn-sm btn-outline-info rounded mt-2">Sign In/Sign Up</a>
+          <a *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-sm btn-outline-info rounded mt-2">Sign In/Sign Up</a>
+          <a *ngIf="isAuthenticated" class="">
+            <span class="mx-3">{{ user?.surname }} {{ user?.firstName }}</span>
+            <img [src]="user?.image || defaultAvatar" class="rounded-circle" width="40rem"  alt="">
+          </a>
         </li>
       </ul>
     </div>

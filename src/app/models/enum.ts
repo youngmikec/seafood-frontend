@@ -10,6 +10,13 @@ export enum Gender {
     OTHER = "OTHER", 
 }
 
+export enum WALLET_STATUS {
+    PENDING = "PENDING",
+    APPROVED = "APPROVED",
+    BLOCKED = "BLOCKED",
+    DELETED = "DELETED"
+}
+
 export const PACKAGE = {
     STATUS: {
         PENDING: "PENDING",

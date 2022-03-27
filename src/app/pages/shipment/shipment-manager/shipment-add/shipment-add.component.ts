@@ -64,7 +64,6 @@ export class ShipmentAddComponent implements OnInit {
       currentLocation:  [''],
       courierName:  [''],
       courierPhone:  [''],
-      status:  [''],
       departureDate: [''],
       expectedDate: [''],
       vehicleType: [''],
@@ -82,7 +81,6 @@ export class ShipmentAddComponent implements OnInit {
       currentLocation: this.record?.currentLocation ? this.record?.currentLocation['address'] : '',
       courierName: this.record?.courierName ? this.record?.courierName : '',
       courierPhone: this.record?.courierPhone ? this.record?.courierPhone : '',
-      status: this.record?.status ? this.record?.status : '',
       departureDate: this.record?.departureDate ? this.record?.departureDate : '',
       expectedDate: this.record?.expectedDate ? this.record?.expectedDate : '',
       vehicleType: this.record?.vehicleType ? this.record?.vehicleType : '',
@@ -135,6 +133,7 @@ export class ShipmentAddComponent implements OnInit {
     payload.locationFrom = {address: payload.locationFrom, coordinates: [32.3242, 65.7564]}
     payload.destination = {address: payload.destination, coordinates: [32.3242, 65.7564]}
     payload.currentLocation = {address: payload.currentLocation, coordinates: [32.3242, 65.7564]}
+
 
     this.shipments.recordUpdate(this.record, payload).then(res => {
       if(res.success){
