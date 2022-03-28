@@ -36,7 +36,8 @@ export class PackageComponent implements OnInit {
 
   getRecords(){
     this.loading = true;
-    this.packages.recordRetrieve().then((res: any) => {
+    const queryString = `?sort=-createdAt&status=PENDING`;
+    this.packages.recordRetrieve(queryString).then((res: any) => {
       if(res.success){
         this.loading = false;
         this.currentRecords = res.payload;

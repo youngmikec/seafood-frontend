@@ -11,18 +11,7 @@
                 <span class="font-weight-bold ms-1">30 done</span> this month
               </p> -->
             </div>
-            <div class="col-lg-6 col-5 my-auto text-end">
-              <div class="dropdown float-lg-end pe-4">
-                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-ellipsis-v text-secondary"></i>
-                </a>
-                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                </ul>
-              </div>
-            </div>
+           
           </div>
         </div>
 
@@ -76,11 +65,12 @@
 <ng-template #content let-modal>
     <div class="modal-header container">
       <h4 class="modal-title">
-        <span *ngIf="modalType === 'create' || modalType === 'edit' ">Parcel Modal</span>
+        <span *ngIf="modalType === 'create' || modalType === 'edit' ">Delivery Modal</span>
         <span *ngIf="modalType === 'package'">Package Modal</span>
         <span *ngIf="modalType === 'delete'">Delete Modal</span>
       </h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+      <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button> -->
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">&times;</button>
     </div>
     <div class="modal-body">
       <div *ngIf="modalType === 'create' || modalType === 'edit' ">
@@ -130,7 +120,6 @@
       </div>
   
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
+    <!-- <div class="modal-footer">
+    </div> -->
   </ng-template>

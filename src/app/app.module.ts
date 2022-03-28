@@ -44,6 +44,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { RegisterItemComponent } from './home/register-item/register-item.component';
 import { WalletManagerComponent } from './home/wallet/wallet-manager/wallet-manager.component';
+import { ProfileComponent } from './home/profile/profile.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { WalletManagerComponent } from './home/wallet/wallet-manager/wallet-mana
     SignupComponent,
     RegisterItemComponent,
     WalletManagerComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

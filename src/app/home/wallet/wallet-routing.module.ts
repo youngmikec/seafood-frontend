@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'dashboard',                      component: WalletComponent },
   { path: 'fund-wallet',           component: FundWalletComponent },
   { path: 'transfer',              component: TransferComponent },
+  { path: 'history',               component: TransferComponent },
 ];
 
 @NgModule({

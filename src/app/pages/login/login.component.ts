@@ -41,12 +41,25 @@ export class LoginComponent implements OnInit {
     // currentElm.addClass('running');
     if(this.addForm?.valid){
       console.log('got here')
-      await this.authService.postLogin(payload, '')
+      try{
+        await this.authService.postLogin(payload, '')
+      }catch(err: any){
+        this.showNotification(err);
+      }
     }else {
       console.log('form is invalild')
       // this.addForm?.controls.email.markAsTouched();
       // this.addForm?.controls.password.markAsTouched();
     }
+  }
+
+  showNotification(message: string) {
+    this.toastr.show(`<span class="now-ui-icons ui-1_bell-53"></span> <b>${message}</b>`, '', {
+      timeOut: 8000,
+      closeButton: true,
+      enableHtml: true,
+      toastClass: 'alert alert-success alert-with-icon',
+    });
   }
 
 }

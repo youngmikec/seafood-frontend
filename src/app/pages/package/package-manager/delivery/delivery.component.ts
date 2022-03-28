@@ -46,7 +46,7 @@ export class DeliveryComponent implements OnInit {
   getRecords(){
     this.loading = true;
     const queryString = `?sort=-createdAt&status=ARRIVED`;
-    this.packages.recordRetrieve().then((res: any) => {
+    this.packages.recordRetrieve(queryString).then((res: any) => {
       if(res.success){
         this.loading = false;
         this.currentRecords = res.payload;

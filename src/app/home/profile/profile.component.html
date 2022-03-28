@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+
+<!-- Profile form -->
+<div class="row my-5">
+    <div class="col-12">
+        <div class="container mx-auto w-50">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                <!--Step 1-->
+                <div>
+                    <div class="card p-5">
+                        <div class="card-header bg-gray-100">
+                            <h5 class="card-title">Edit Profile</h5>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="surname" class="control-label">Surname</label>
+                                <input type="text" class="form-control" formControlName="surname" placeholder="surname">
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName" class="control-label">First Name</label>
+                                <input type="text" class="form-control" formControlName="firstName" placeholder="first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="middleName" class="control-label">Middle Name</label>
+                                <input type="text" class="form-control" formControlName="middleName" placeholder="middle name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                <input type="email" class="form-control" formControlName="email" placeholder="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="control-label">Phone</label>
+                                <input type="text" class="form-control" formControlName="phone" placeholder="phone">
+                            </div>
+                            <div class="form-group text-center">
+                                <button class="btn btn-lg bg-dark text-white mx-2">save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+        
+    </div>
+</div>
+
+<!-- Password reset form -->
+<div class="row my-5">
+    <div class="col-12">
+        <div class="container mx-auto w-50">
+            <form [formGroup]="passwordForm" (ngSubmit)="resetPassword()">
+                <!--Step 1-->
+                <div>
+                    <div class="card p-5">
+                        <div class="card-header bg-gray-100">
+                            <h5 class="card-title">Change Password</h5>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="oldPassword" class="control-label">Old Password</label>
+                                <input type="text" class="form-control" formControlName="oldPassword" placeholder="Old password">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">New Password</label>
+                                <input type="text" class="form-control" formControlName="password" placeholder="new password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword" class="control-label">Confirm Password</label>
+                                <input type="text" class="form-control" formControlName="confirmPassword" placeholder="confirm password">
+                            </div>
+                            
+                            <div class="form-group text-center">
+                                <button class="btn btn-lg bg-dark text-white mx-2">save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+        
+    </div>
+</div>
+<app-footer></app-footer>

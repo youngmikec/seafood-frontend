@@ -44,9 +44,26 @@
             </a>
           
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profile</a>
-              <a class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >Transactions</a>
-              <a class="dropdown-item" (click)="logout()">Log out</a>
+              <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" >
+                <span class="mx-3">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </span>
+                Profile
+              </a>
+
+              <a class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >
+                <span class="mx-3">
+                  <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                </span>
+                Transactions
+              </a>
+
+              <a class="dropdown-item" (click)="logout()">
+                <span class="mx-3">
+                  <i class="fa fa-power-off" aria-hidden="true"></i>
+                </span>
+                Log out
+              </a>
             </div>
           </a>
         </li>

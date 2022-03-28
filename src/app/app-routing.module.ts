@@ -9,6 +9,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { RegisterItemComponent } from './home/register-item/register-item.component';
 import { WalletManagerComponent } from './home/wallet/wallet-manager/wallet-manager.component';
 import { TrackingComponent } from './components/tracking/tracking.component';
+import { ProfileComponent } from './home/profile/profile.component';
+
 
 const routes: Routes = [
   { path: '',        redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +21,7 @@ const routes: Routes = [
   // { path: 'login',   loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   { path: 'login',                     component: LoginComponent },
   { path: 'signup',                    component: SignupComponent },
+  { path: 'profile',                   component: ProfileComponent },
   // { path: 'login-otp',              component: LoginOtpComponent },
   // { path: 'forgot-password',        component: ForgotPasswordComponent },
 

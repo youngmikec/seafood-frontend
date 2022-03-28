@@ -49,7 +49,7 @@ export class AuthService {
             console.error('Error storing record token');
           }
           // const goingTo = payload.otp ? '/forgot-password' :  '/admin/dashboard';
-          const goingTo = data.userType !== 'ADMIN' ? '/login' :  '/admin/dashboard';
+          const goingTo = data.userType !== 'ADMIN' ? '/home' :  '/admin/dashboard';
           this.isLoggedIn = true;
           // const intendURL = getLocalStorage('intendURL') === null ? goingTo : getLocalStorage('intendURL');
           this.router.navigate([goingTo]);

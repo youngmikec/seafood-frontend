@@ -128,6 +128,7 @@ export class ShipmentComponent implements OnInit {
 
     this.shipments.shipmentOperation(record, operationObject).then((res) => {
       if(res.success){
+        this.getRecords();
         this.showNotification(res.message);
       }
     }).catch((err: any) => this.showNotification(err));
