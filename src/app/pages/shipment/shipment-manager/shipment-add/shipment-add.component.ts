@@ -141,7 +141,10 @@ export class ShipmentAddComponent implements OnInit {
         this.showNotification(res.message);
       }
     })
-    .catch(err => this.showNotification(err))
+    .catch(err => {
+      this.loading = false;
+      this.showNotification(err)
+    })
     .finally(() => {
       this.loading = false;
     })

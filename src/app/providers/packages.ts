@@ -108,6 +108,23 @@ export class Packages {
         }));
       return await proRes.toPromise();
     }
+
+    async recordDeliver(record: Package | any, payload: any): Promise<ApiResponse> {
+      const url = `${this.env.API_URL}/package/operation/${record.id}`;
+      const proRes = this.apiService.updateApi(url, payload).pipe(
+        map((res: ApiResponse) => {
+          if (res.success) {
+            this.delete(record);
+            this.recordRetrieve().then(res =>{
+                this.parcels = res.payload;
+            })
+          } else {
+            throwError(res.message);
+          }
+          return res;
+        }));
+      return await proRes.toPromise();
+    }
   
     async recordDelete(record: Package): Promise<ApiResponse> {
       const url = `${this.env.API_URL}/package/${record.id}`;

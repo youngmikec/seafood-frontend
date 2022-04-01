@@ -321,3 +321,54 @@ export const VEHICLE = {
     KINGO: "KINGO",
   },
 };
+
+export const OFFICE_LOCATIONS = {
+  locations: [
+    {
+      country: "Nigeria",
+      state: "Enugu State",
+      offices: [
+        {
+          name: "Trans-Ekulu",
+          address: "No 32 Nowas Trans-Ekulu Enugu East Enugu state Nigeria."
+        },
+        {
+          name: "Ziks Avenue",
+          address: "No 104b Zik's Avenue Uwani Enugu state Nigeria."
+        },
+        {
+          name: "New Haven",
+          address: "No 69 Chime New Haven Enugu state Nigeria."
+        },
+      ]
+    },
+    {
+      country: "Nigeria",
+      state: "Imo State",
+      offices: [
+        {
+          name: "Wethedral",
+          address: "No 32 Wethedral off Cherobin junction Imo state Nigeria."
+        },
+        {
+          name: "Okigwe Road",
+          address: "Bank Road Okigwe Road Imo state Nigeria."
+        },
+      ]
+    },
+    {
+      country: "United States of America",
+      state: "Alaska",
+      offices: [
+        {
+          name: "Ketchikan",
+          address: "Ketchikan Alaska USA."
+        },
+        {
+          name: "Healdsburg CA",
+          address: "Healdsburg CA Alaska USA."
+        },
+      ]
+    },
+  ]
+}

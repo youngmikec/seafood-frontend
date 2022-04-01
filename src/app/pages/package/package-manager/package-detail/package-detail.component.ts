@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Package } from '../../../../models';
 
 @Component({
   selector: 'app-package-detail',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./package-detail.component.scss']
 })
 export class PackageDetailComponent implements OnInit {
+  @Input() record: Package | any;
 
   constructor() { }
 

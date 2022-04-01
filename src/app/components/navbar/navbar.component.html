@@ -19,46 +19,57 @@
 
 
 <nav class="navbar navbar-dark bg-dark d-flex justify-content-between">
-  <div class="container-fluid py-4">
+  <div class="container-fluid py-1">
 
     <div class="flex">
-      <a class="navbar-brand" href="#">SeaWay</a>
+      <a class="navbar-brand" [routerLink]="['/home']">SeaWay</a>
     </div>
     <div class="flex navigation-items">
       <ul class="list-inline list-unstyled d-inline">
         <li>
-          <a href="/">Our Offices</a>
+          <a [routerLink]="['/offices']" routerLinkActive="router-link-active" >Our Offices</a>
         </li>
         <li>
-          <a href="/">About Us</a>
+          <a [routerLink]="['/about-us']" routerLinkActive="router-link-active" >About Us</a>
         </li>
-        <li>
+        <!-- <li>
           <a href="/">Our Services</a>
-        </li>
+        </li> -->
         <li>
-          <a *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-sm btn-outline-info rounded mt-2">Sign In/Sign Up</a>
-          <a *ngIf="isAuthenticated" class="dropdown show">
-            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <a *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-sm btn-outline-info rounded mt-2">Sign In/Sign Up</a> -->
+          <a class="dropdown show">
+            <a *ngIf="!isAuthenticated" class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="mx-3">Account</span>
+            </a>
+
+            <a *ngIf="isAuthenticated" class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="mx-3">{{ user?.surname }} {{ user?.firstName }}</span>
               <img [src]="user?.image || defaultAvatar" class="rounded-circle" width="40rem"  alt="">
             </a>
           
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" >
+              <a *ngIf="!isAuthenticated" class="dropdown-item" [routerLink]="['/login']" routerLinkActive="router-link-active" >
+                Login
+              </a>
+              <a *ngIf="!isAuthenticated" class="dropdown-item" [routerLink]="['/signup']" routerLinkActive="router-link-active" >
+                Signup
+              </a>
+
+              <a *ngIf="isAuthenticated" class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" >
                 <span class="mx-3">
                   <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                 </span>
                 Profile
               </a>
 
-              <a class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >
+              <a *ngIf="isAuthenticated" class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >
                 <span class="mx-3">
                   <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                 </span>
                 Transactions
               </a>
 
-              <a class="dropdown-item" (click)="logout()">
+              <a *ngIf="isAuthenticated" class="dropdown-item" (click)="logout()">
                 <span class="mx-3">
                   <i class="fa fa-power-off" aria-hidden="true"></i>
                 </span>
@@ -75,9 +86,9 @@
       </button>
       <div class="collapse navbar-collapse pull-right" id="navbarNavAltMarkup">
         <div class="navbar-nav align-items-lg-center d-flex ml-lg-auto pull-right">
-          <a class="nav-item nav-link active flex-1" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link flex-1" href="#">Our Offices</a>
-          <a class="nav-item nav-link flex-1" href="#">About us</a>
+          <a class="nav-item nav-link active flex-1" [routerLink]="['/home']" routerLinkActive="router-link-active">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link flex-1" [routerLink]="['/offices']" routerLinkActive="router-link-active">Our Offices</a>
+          <a class="nav-item nav-link flex-1" [routerLink]="['/about-us']" routerLinkActive="router-link-active">About us</a>
           <!-- <a class="nav-item nav-link flex-1 disabled" href="#">Our Service</a> -->
         </div>
       </div>

@@ -55,8 +55,9 @@ export class ShipmentComponent implements OnInit {
   }
 
   getAvailablePackages(){
-    const queryString = `?filter={"status": [{"PENDING"}]}`;
-    this.packages.recordRetrieve().then(res => {
+    // const queryString = `?filter={"status": [{"PENDING"}]}&sort=-createdAt`;
+    const queryString = `?status=PENDING&sort=-createdAt`;
+    this.packages.recordRetrieve(queryString).then(res => {
       if(res.success){
         this.returnedPackages = res.payload;
       }
@@ -75,6 +76,10 @@ export class ShipmentComponent implements OnInit {
         break;
       case "peep": 
         this.formType = 'peep';
+        this.currentRecord = record;
+        break;
+      case "detail": 
+        this.formType = 'detail';
         this.currentRecord = record;
         break;
       case "delete": 

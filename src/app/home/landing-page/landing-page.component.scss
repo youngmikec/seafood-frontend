@@ -142,8 +142,11 @@
     
     .tile:hover {
         background: #304f88;
-        color: #ffffff;
+        color: #ffffff !important;
         cursor: pointer;
+        h3 {
+            color: white;
+        }
     }
 }
 

@@ -20,7 +20,7 @@ export class ParcelComponent implements OnInit {
   loading: boolean = false;
   packaging: boolean = false;
   deleting: boolean = false;
-  currentRecord: Parcel | null = null;
+  currentRecord: Parcel | any = null;
   currentRecords: Array<Parcel> = [];
   headers: Array<string> = ['S/N', 'Name'];
   sidebarContent: string = '';
@@ -162,6 +162,10 @@ export class ParcelComponent implements OnInit {
         this.currentRecord = record;
         break;
       case "peep": 
+        this.modalType = type;
+        this.currentRecord = record;
+        break;
+      case "detail": 
         this.modalType = type;
         this.currentRecord = record;
         break;

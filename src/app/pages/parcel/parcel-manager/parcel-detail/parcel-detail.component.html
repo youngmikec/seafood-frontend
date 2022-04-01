@@ -1,1 +1,29 @@
-<p>parcel-detail works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Parcel Detail</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary"><th>Property</th><th>Value</th></thead>
+                  <tbody>
+                  <tr><th>Name</th><td>{{ record?.name }}</td></tr>
+                  <tr><th>Code</th><td>{{ record?.code }}</td></tr>                  
+                  <tr><th>Worth</th><td>{{ record?.worth | currency: 'NGN' : 'symbol-narrow' : '4.2-2' }}</td></tr>                  
+                  <tr><th>Mass</th><td>{{ record?.mass }}</td></tr>                  
+                  <tr><th>Volume</th><td>{{ record?.volume }}</td></tr>                  
+                  <tr><th>Quantity</th><td>{{ record?.quantity }}</td></tr>                  
+                  <tr><th>Status</th><td>{{ record?.status }}</td></tr>                  
+                  <tr><th>Recipient Mode of Identification</th><td>{{ record?.identification }}</td></tr>                                   
+                  <tr><th>Date created</th><td>{{ record?.createdAt | date }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

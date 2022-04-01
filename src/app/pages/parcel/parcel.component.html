@@ -73,7 +73,7 @@
                           </a>
                         
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" (click)="openModal('lg', 'edit', content, record)">View</a>
+                            <a class="dropdown-item" (click)="openModal('lg', 'detail', content, record)">View</a>
                             <a class="dropdown-item" (click)="openModal('xl', 'edit', content, record)">Edit</a>
                             <a class="dropdown-item" (click)="openModal('lg', 'delete', content, record)">Delete</a>
                           </div>
@@ -97,13 +97,21 @@
       <span *ngIf="modalType === 'package'">Package Modal</span>
       <span *ngIf="modalType === 'delete'">Delete Modal</span>
     </h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button> -->
+    <button type="button" class="btn bg-white text-dark" (click)="modal.close('Close click')">&times;</button>
+
   </div>
   <div class="modal-body">
     <div *ngIf="modalType === 'create' || modalType === 'edit' ">
       <app-parcel-add [record]="currentRecord" [formType]="modalType" (changed)="getRecords()">
       </app-parcel-add>
     </div>
+
+    <!--Detail modal-->
+    <div id="package-detail" 
+          *ngIf="modalType === 'detail'">
+            <app-parcel-detail [record]="currentRecord"></app-parcel-detail>
+        </div>
 
     <div *ngIf="modalType === 'package'">
       <form [formGroup]="packageForm" (ngSubmit)="createPackage()">
@@ -291,7 +299,6 @@
     </div>
 
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  </div>
+  <!-- <div class="modal-footer">
+  </div> -->
 </ng-template>

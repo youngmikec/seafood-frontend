@@ -75,7 +75,7 @@
                           </a>
                         
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" (click)="openViewModal(record)">View</a>
+                            <a class="dropdown-item" (click)="openModal('lg', 'detail', content, record)">View</a>
                             <a class="dropdown-item" (click)="openModal('lg', 'edit', content, record)">Edit</a>
                             <a class="dropdown-item" (click)="openModal('lg', 'delete', content, record)">Delete</a>
                           </div>
@@ -94,7 +94,9 @@
 <ng-template #content let-modal>
   <div class="modal-header container">
     <h4 class="modal-title">{{ formType === 'peep' ? 'Package Peep Modal' : 'Shipment Modal' }}</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button> -->
+    <button type="button" class="btn bg-white text-dark" (click)="modal.close('Close click')">Close</button>
+
   </div>
   <div class="modal-body">
         <div id="shipment-form" 
@@ -102,6 +104,11 @@
           formType === 'edit' "
         >
             <app-shipment-add [packageRecords]="returnedPackages" [formType]="formType" [record]="currentRecord" (changed)="getRecords()"></app-shipment-add>
+        </div>
+
+        <div id="package-detail" 
+          *ngIf="formType === 'detail'">
+            <app-shipment-detail [record]="currentRecord"></app-shipment-detail>
         </div>
 
         <div id="peep-modal" *ngIf="formType === 'peep' ">
@@ -161,7 +168,6 @@
           </div>
         </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  </div>
+  <!-- <div class="modal-footer">
+  </div> -->
 </ng-template>

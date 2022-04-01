@@ -45,6 +45,8 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { RegisterItemComponent } from './home/register-item/register-item.component';
 import { WalletManagerComponent } from './home/wallet/wallet-manager/wallet-manager.component';
 import { ProfileComponent } from './home/profile/profile.component';
+import { OfficesComponent } from './home/offices/offices.component';
+import { AboutUsComponent } from './home/about-us/about-us.component';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { ProfileComponent } from './home/profile/profile.component';
     RegisterItemComponent,
     WalletManagerComponent,
     ProfileComponent,
+    OfficesComponent,
+    AboutUsComponent,
   ],
   imports: [
     CommonModule,

@@ -17,11 +17,12 @@ export enum WALLET_STATUS {
     DELETED = "DELETED"
 }
 
-export const PACKAGE = {
-    STATUS: {
-        PENDING: "PENDING",
-        CHECKEDOUT: "CHECKEDOUT",
-        PICKUP: "PICKUP",
-        CANCELLED: "CANCELLED"
-    }
+export enum PACKAGE_STATUS {
+    ARRIVED = "ARRIVED",
+    CHECKEDOUT = "CHECKEDOUT",
+    CONFIRMED = "CONFIRMED",
+    DELIVERED = "DELIVERED",
+    PENDING = "PENDING",
+    PICKEDUP = "PICKEDUP",
+    SHIPPED = "SHIPPED"
 }

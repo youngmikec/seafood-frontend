@@ -10,6 +10,8 @@ import { RegisterItemComponent } from './home/register-item/register-item.compon
 import { WalletManagerComponent } from './home/wallet/wallet-manager/wallet-manager.component';
 import { TrackingComponent } from './components/tracking/tracking.component';
 import { ProfileComponent } from './home/profile/profile.component';
+import { OfficesComponent } from './home/offices/offices.component';
+import { AboutUsComponent } from './home/about-us/about-us.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'login',                     component: LoginComponent },
   { path: 'signup',                    component: SignupComponent },
   { path: 'profile',                   component: ProfileComponent },
+  { path: 'offices',                   component: OfficesComponent },
+  { path: 'about-us',                  component: AboutUsComponent },
   // { path: 'login-otp',              component: LoginOtpComponent },
   // { path: 'forgot-password',        component: ForgotPasswordComponent },
 

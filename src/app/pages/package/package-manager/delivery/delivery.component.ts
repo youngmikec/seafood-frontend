@@ -62,7 +62,7 @@ export class DeliveryComponent implements OnInit {
     this.loading = true;
     const payload = this.deliveryForm.value;
     payload.status = 'DELIVERED';
-    this.packages.recordUpdate(this.currentRecord, payload).then(res => {
+    this.packages.recordDeliver(this.currentRecord, payload).then(res => {
       if(res.success){
         this.showNotification('Package successfully delivered');
         this.getRecords();

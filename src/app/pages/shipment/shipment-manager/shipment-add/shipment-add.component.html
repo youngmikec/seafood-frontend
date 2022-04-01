@@ -14,7 +14,7 @@
                               <div class="form-group">
                                   <label for="packages" class="control-label"><strong>Packages*</strong></label>
                                   <!-- <input type="text" formControlName="packages" class="form-control"> -->
-                                  <ng-select 
+                                  <!-- <ng-select 
                                     class="form-control"
                                     bindValue="id"
                                     bindLabel="name"
@@ -22,7 +22,10 @@
                                     [items]="packageRecords" 
                                     [virtualScroll]="true"
                                     (change)="addToPackagesArray($event)"
-                                    ></ng-select>
+                                    ></ng-select> -->
+                                    <select name="packages" id="packages" class="form-control" formControlName="packages" (change)="addToPackagesArray($event)">
+                                        <option *ngFor="let package of packageRecords" value="{{package.id}}">{{ package.name }} ({{ package.code }})</option>
+                                    </select>
                               </div>
                           </div>
                 

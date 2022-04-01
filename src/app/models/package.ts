@@ -1,3 +1,4 @@
+import { PACKAGE_STATUS } from "./enum";
 import { User } from "./index";
 
 export interface Package {
@@ -6,6 +7,7 @@ export interface Package {
     code?:                string; 
     name?:                string;
     parcels?:             Array<string>;
+    amountPayable?:       number;
     totalAmount?:         number;
     totalShipingFee?:     number;
     senderName?:          string;
@@ -16,12 +18,13 @@ export interface Package {
     pickupCoordinates?:   Array<number>;
     deliveryAddress?:     string;
     deliveryCoordinates?: Array<number>;
-    status?:              "PENDING" | "CHECKEDOUT" | "PICKUP" | "CANCELLED";
+    status?:              PACKAGE_STATUS;
     remark?:              string;
     transactionRef?:      string;
     isCheckedOut?:        boolean;
-    paymentMethod?:       "CASH" | "TRANSFER" | "GATEWAY";
-    paymentGateway?:      "SUCCESS" | "FAIL" | "PENDING";
+    paymentMethod?:       "CASH" | "TRANSFER" | "GATEWAY" | "WALLET";
+    paymentGateway?:      "Paystack" | "Flutterwave" | "Paypal";
+    paymentStatus?:       "SUCCESS" | "FAIL" | "PENDING";
     pickupDate?:          Date;
     deliveryDate?:        Date;
     createdAt?:           Date;
@@ -39,6 +42,7 @@ export class Package {
     code?:                string; 
     name?:                string;
     parcels?:             Array<string>;
+    amountPayable?:       number;
     totalAmount?:         number;
     totalShipingFee?:     number;
     senderName?:          string;
@@ -49,12 +53,13 @@ export class Package {
     pickupCoordinates?:   Array<number>;
     deliveryAddress?:     string;
     deliveryCoordinates?: Array<number>;
-    status?:              "PENDING" | "CHECKEDOUT" | "PICKUP" | "CANCELLED";
+    status?:              PACKAGE_STATUS;
     remark?:              string;
     transactionRef?:      string;
     isCheckedOut?:        boolean;
-    paymentMethod?:       "CASH" | "TRANSFER" | "GATEWAY";
-    paymentGateway?:      "SUCCESS" | "FAIL" | "PENDING";
+    paymentMethod?:       "CASH" | "TRANSFER" | "GATEWAY" | "WALLET";
+    paymentGateway?:      "Paystack" | "Flutterwave" | "Paypal";
+    paymentStatus?:       "SUCCESS" | "FAIL" | "PENDING";
     pickupDate?:          Date;
     deliveryDate?:        Date;
     createdAt?:           Date;

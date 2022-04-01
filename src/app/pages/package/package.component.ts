@@ -14,12 +14,14 @@ import { Packages } from '../../providers';
 export class PackageComponent implements OnInit {
 
   loading: boolean = false;
+  deleting: boolean = false;
   packaging: boolean = false;
   currentRecord: Package | any = null;
   currentRecords: Array<Package> = [];
   headers: Array<string> = ['S/N', 'Name'];
   sidebarContent: string = '';
   currentSelectedPackages: Array<any> = [];
+  formType: string = '';
   //@ts-ignore
   packageForm: FormGroup;
 
@@ -49,8 +51,48 @@ export class PackageComponent implements OnInit {
     });
   }
 
-  openXl(size: string = 'xl', content: any = ''): void {
+  openModal(size: string = 'xl', type: string, content: any = '', record: any = null): void {
+    switch (type) {
+      case 'create':
+        this.formType = 'create';
+        this.currentRecord = record;
+        break;
+      case 'edit':
+        this.formType = 'edit';
+        this.currentRecord = record;
+        break;
+      case "peep": 
+        this.formType = 'peep';
+        this.currentRecord = record;
+        break;
+      case "detail": 
+        this.formType = 'detail';
+        this.currentRecord = record;
+        break;
+      case "delete": 
+        this.formType = 'delete';
+        this.currentRecord = record;
+        break;
+      default:
+        this.formType = 'create';
+        this.currentRecord = record;
+    }
     this.modalService.open(content, { size: size });
+  }
+
+  deleteRecord(record: Package){
+    this.deleting = true;
+    this.packages.recordDelete(record).then(res => {
+      if(res.success){
+        this.currentRecord = null;
+        this.getRecords();
+        this.showNotification(res.message);
+      }
+    }).catch(err => {
+      this.showNotification(err);
+    }).finally(() => {
+      this.deleting = false;
+    })
   }
 
   showNotification(message: string) {
