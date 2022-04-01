@@ -273,15 +273,18 @@
 
 @include media-breakpoint-up(lg) {
   .dropdown-xl {
-    min-width: $dropdown-xl-min-width;
+    // min-width: $dropdown-xl-min-width;
+    min-width: max-content;
   }
 
   .dropdown-lg {
-    min-width: $dropdown-lg-min-width;
+    // min-width: $dropdown-lg-min-width;
+    min-width: max-content;
   }
 
   .dropdown-md {
-    min-width: $dropdown-md-min-width;
+    // min-width: $dropdown-md-min-width;
+    min-width: max-content;
   }
 }
 

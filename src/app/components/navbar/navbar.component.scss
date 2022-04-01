@@ -28,6 +28,13 @@ ul li {
     display: none;
 }
 
+.dropdown-menu {
+
+    left: -1.1rem;
+    min-width: max-content;
+   
+}
+
 @media screen and (max-width: 718px) {
     #hidden-div{
         display: block;

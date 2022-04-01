@@ -19,22 +19,23 @@
                 <span class="pos-9"></span>
             </div>
             <div id="skew-seperator"></div>
-            <div id="display-overlay" class="container">
+            <div id="display-overlay">
                 <div class="row">
-                    <div class="col-lg-6 col-sm-5 col-xs-12">
-                        <div class="brand">
-            
-                            <h1 class="display-3 text-white pt-100" style="font-weight: 800;">
+                    <div class="col-lg-6 col-md-12 col-xs-12 text-center">
+                        <div class="container">
+                            <h1 class="text-white pt-100" style="font-weight: 800;">
                               International Logistic at it's best.
                             </h1>
                             <p class="lead text-white" style="font-weight: 500;"> We give true definition of seamless service. </p>
                             <br>
-                                <app-tracking (changed)="setCurrentRecord($event)"></app-tracking>
+                            <div>
+                                <app-tracking (changed)="setCurrentRecord($event)"></app-tracking>  
+                            </div>
                             <br>
                             <br>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-7 col-xs-12">
+                    <div id="image-wrapper" class="col-lg-6 col-md-12 col-xs-12">
                       <img src="../../../assets/img/apps.jpg" style="border-radius: 10px;" height="350em" width="200em" class="phone1" id="parallax-1" alt="alt image">
                       <!-- <img src="assets/img/samsung.png" class="phone2" id="parallax-2" alt="alt image"> -->
                     </div>
@@ -112,7 +113,7 @@
             <div class="display">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-7 col-xs-12">
+                        <div class="col-lg-6 col-md-12 col-xs-12">
                             <div class="brand">
                                 <p class="display-6 text-white">
                                     <strong>SeaWay, the app for local and international shipping</strong>
@@ -142,8 +143,8 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-sm-7 col-xs-0 d-flex justify-content-end">
-                            <div id="rounded-image" class="w-75 rounded-circle bg-white mt-n5" style="height: 22rem; box-shadow: 3px 3px 5px 0 white;"></div>
+                        <div class="col-lg-6 col-md-12 col-xs-12 text-right">
+                            <div id="rounded-image" class=" rounded-circle bg-white mt-0"></div>
                           <!-- <img src="../../../assets/img/delivery-mobile.jpg" style="border-radius: 10px;" height="350em" width="200em" class="phone1" id="parallax-1" alt="alt image"> -->
                           <!-- <img src="assets/img/samsung.png" class="phone2" id="parallax-2" alt="alt image"> -->
                         </div>
@@ -202,18 +203,7 @@
               </div>
             </div>
           </div>
-          <div class="our-clients text-center">
-            <div class="card-featured-content">
-                <!-- <img src="../../../assets//img/drake.jpg" alt="alt image">
-                <img src="../../../assets//img/drake.jpg" alt="alt image">
-                <img src="../../../assets//img/drake.jpg" style="width:70px;" alt="alt image">
-                <img src="../../../assets//img/drake.jpg" style="width: 90px" alt="alt image">
-                <img src="../../../assets//img/drake.jpg" style="width: 75px;" alt="alt image">
-                <img src="../../../assets//img/drake.jpg" style="width:75px;" alt="alt image">
-                <img src="../../../assets//img/drake.jpg" style="width:80px;" alt="alt image">
-                <img src="../../../assets//img/drake.jpg" alt="alt image"> -->
-            </div>
-          </div>
+          
         </div>
       </div>
 
