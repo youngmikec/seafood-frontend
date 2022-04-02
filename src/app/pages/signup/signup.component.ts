@@ -64,9 +64,12 @@ export class SignupComponent implements OnInit {
           password: payload.password,
           userType: 'SENDER'
         }
-        await this.authService.postLogin(loginPayload, '')
-        this.showNotification(res.message);
-        this.router.navigate(["/home"]);
+        this.authService.postLogin(loginPayload, '').then(res => {
+          if(res.success){
+            this.showNotification("Login successful");
+            this.router.navigate(["/home"]);
+          }
+        }).catch((error: any) => this.showNotification(error));
       }
     }).catch((err: any) => {
       this.showNotification(err);

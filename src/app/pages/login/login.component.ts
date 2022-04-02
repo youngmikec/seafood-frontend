@@ -37,15 +37,15 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     this.loading = true;
     const payload = this.addForm?.value;
-    // const currentElm = $('button.hovering.ld-over');
-    // currentElm.addClass('running');
     if(this.addForm?.valid){
-      console.log('got here')
-      try{
-        await this.authService.postLogin(payload, '')
-      }catch(err: any){
-        this.showNotification(err);
-      }
+        this.authService.postLogin(payload, '').then(res => {
+          if(res.success){
+            this.showNotification("User login successful");
+          }
+        }).catch((err: any) => this.showNotification(err))
+        .finally(() => {
+          this.loading = false;
+        });
     }else {
       console.log('form is invalild')
       // this.addForm?.controls.email.markAsTouched();
