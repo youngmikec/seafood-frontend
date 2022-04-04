@@ -55,8 +55,8 @@ export class ShipmentComponent implements OnInit {
   }
 
   getAvailablePackages(){
-    // const queryString = `?filter={"status": [{"PENDING"}]}&sort=-createdAt`;
-    const queryString = `?status=PENDING&sort=-createdAt`;
+    let queryString = `?filter={"$or": [{"status": "PENDING"}, {"status": "PICKEDUP"}]}`;
+    queryString += `&sort=-createdAt`;
     this.packages.recordRetrieve(queryString).then(res => {
       if(res.success){
         this.returnedPackages = res.payload;
@@ -141,7 +141,7 @@ export class ShipmentComponent implements OnInit {
 
   showNotification(message: string) {
     this.toastr.show(`<span class="now-ui-icons ui-1_bell-53"></span> <b>${message}</b>`, '', {
-      timeOut: 8000,
+      timeOut: 4000,
       closeButton: true,
       enableHtml: true,
       toastClass: 'alert alert-success alert-with-icon',

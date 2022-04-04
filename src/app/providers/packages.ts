@@ -109,7 +109,7 @@ export class Packages {
       return await proRes.toPromise();
     }
 
-    async recordDeliver(record: Package | any, payload: any): Promise<ApiResponse> {
+    async packageOperation(record: Package | any, payload: any): Promise<ApiResponse> {
       const url = `${this.env.API_URL}/package/operation/${record.id}`;
       const proRes = this.apiService.updateApi(url, payload).pipe(
         map((res: ApiResponse) => {

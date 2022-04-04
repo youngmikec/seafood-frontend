@@ -5,8 +5,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { Parcel } from '../../models';
-import { Parcels, Packages } from '../../providers';
 import { MapService } from '../../services';
+import { DestructureGeocoding } from '../../helpers';
+import { Parcels, Packages, Geocodings } from '../../providers';
 
 @Component({
   selector: 'app-parcel',
@@ -39,6 +40,7 @@ export class ParcelComponent implements OnInit {
     private mapService: MapService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
+    private geocodings: Geocodings,
   ) {
     this.createPackageForm();
    }
@@ -60,6 +62,8 @@ export class ParcelComponent implements OnInit {
       recipientEmail: ['', Validators.required],
       pickupAddress: ['', Validators.required],
       deliveryAddress: ['', Validators.required],
+      deliveryCoordinates: [''],
+      pickupCoordinates: [''],
       paymentMethod: ['', Validators.required],
       paymentGateway: [''],
       paymentStatus: ['PENDING', Validators.required],
@@ -70,7 +74,8 @@ export class ParcelComponent implements OnInit {
   
   getRecords(){
     this.loading = true;
-    this.parcels.recordRetrieve().then((res: any) => {
+    const query: string = `?sort=-createdAt`;
+    this.parcels.recordRetrieve(query).then((res: any) => {
       if(res.success){
         this.loading = false;
         this.currentRecords = res.payload;
@@ -82,6 +87,30 @@ export class ParcelComponent implements OnInit {
     })
   }
 
+  getGeoCoordinate($event: any, name: any): void {
+    const { target } = $event;
+    const payload = {
+      address: target.value,
+      direction: 'forward'
+    }
+    this.geocodings.recordCreate(payload).then(res => {
+      if(res.success){
+        const { address, coordinate: {lat, lng} } = DestructureGeocoding(res.payload.results[0]);
+        if(name === 'deliveryAddress'){
+          this.packageForm.patchValue({
+            deliveryCoordinates: [lat, lng]
+          })
+        }
+        if(name === 'pickupAddress'){
+          this.packageForm.patchValue({
+            pickupCoordinates: [lat, lng]
+          })
+        }
+        this.showNotification(`Successful`);
+      }
+    }).catch((err: any) => this.showNotification(err));
+  } 
+
   calculateCost = (records: any) => {
     const cummulativeAmount = records.map((item: any) => item.amountPayable).reduce((a: number, b: number) => a + b);
     const cummulativeShippingFee = records.map((item: any) => item.shippingFee).reduce((a: number, b: number) => a + b);
@@ -89,14 +118,11 @@ export class ParcelComponent implements OnInit {
   }
 
   onSelectChange(event: Parcel | any) {
-    console.log(event.id);
     const found = this.currentSelectedParcels.filter(option => option.id === event.id);
-    console.log('Seen item  => ', found);
     if (found.length < 1) {
       this.currentSelectedParcels.push(event);
       const { amount } = this.calculateCost(this.currentSelectedParcels);
       this.totalAmount = amount;
-      console.log('The current selected parcels ==> ', this.currentSelectedParcels);
     } else {
       this.currentSelectedParcels = this.currentSelectedParcels.filter(option => option.id !== event.id);
       const { amount } = this.calculateCost(this.currentSelectedParcels);
@@ -111,8 +137,6 @@ export class ParcelComponent implements OnInit {
     this.packaging = true;
     const payload = this.packageForm.value;
     payload.parcels = this.currentSelectedParcels.map(option => option.id);
-    payload.deliveryCoordinates = [5.4355, 7.9874];
-    payload.pickupCoordinates = [5.4355, 7.9874];
 
     this.packages.AdminRecordCreate(payload).then(res => {
       if(res.success){
@@ -197,7 +221,7 @@ export class ParcelComponent implements OnInit {
 
   showNotification(message: string) {
     this.toastr.show(`<span class="now-ui-icons ui-1_bell-53"></span> <b>${message}</b>`, '', {
-      timeOut: 8000,
+      timeOut: 4000,
       closeButton: true,
       enableHtml: true,
       toastClass: 'alert alert-success alert-with-icon',

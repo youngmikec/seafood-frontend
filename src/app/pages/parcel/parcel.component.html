@@ -1,14 +1,10 @@
-<div class="row mb-4 mt-4">
+<div class="row mb-4 mt-n1">
     <div class="col-lg-12 col-md-12 col-xs-12 mb-md-0 mb-4">
       <div class="card">
         <div class="card-header pb-0">
           <div class="row">
             <div class="col-lg-6 col-7">
               <div class="d-flex">
-                <!-- <button rel="tooltip" title="New Record" class="btn btn-primary rounded flex-1 mr-3">
-                  <i class="now-ui-icons ui-1_simple-add"></i> Add New
-                </button> -->
-
                 <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openModal('xl', 'create', content)">Add New</button>
 
                 <div class="push-right ml-3" *ngIf="currentSelectedParcels.length > 0">
@@ -17,11 +13,9 @@
                   </button>
                 </div>
               </div>
+
               <h4>Parcels Today</h4>
-              <!-- <p class="text-sm mb-0">
-                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                <span class="font-weight-bold ms-1">30 done</span> this month
-              </p> -->
+              
             </div>
             <div class="col-lg-6 col-5 my-auto text-end">
               <div class="dropdown float-lg-end pe-4">
@@ -97,7 +91,7 @@
       <span *ngIf="modalType === 'package'">Package Modal</span>
       <span *ngIf="modalType === 'delete'">Delete Modal</span>
     </h4>
-    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button> -->
+    
     <button type="button" class="btn bg-white text-dark" (click)="modal.close('Close click')">&times;</button>
 
   </div>
@@ -179,14 +173,14 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="deliveryAddress" class="control-label"><strong>Delivery Address*</strong></label>
-                <input type="text" class="form-control" formControlName="deliveryAddress">
+                <input type="text" class="form-control" formControlName="deliveryAddress" (change)="getGeoCoordinate($event, 'deliveryAddress')">
             </div>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
                   <label for="pickupAddress" class="control-label"><strong>Pickup Address*</strong></label>
-                  <input type="text" class="form-control" formControlName="pickupAddress">
+                  <input type="text" class="form-control" formControlName="pickupAddress" (change)="getGeoCoordinate($event, 'pickupAddress')">
               </div>
           </div>
 
@@ -197,7 +191,6 @@
                 <select name="paymentMethod" [(ngModel)]="paymentMethod" id="paymentMethod" formControlName="paymentMethod" class="form-control">
                     <option value="">Select payment method</option>
                     <option value="CASH">CASH</option>
-                    <option value="GATEWAY">GATEWAY</option>
                     <option value="TRANSFER">TRANSFER</option>
                 </select>
             </div>

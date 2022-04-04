@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+
 import { Parcel } from '../../models';
+import { DestructureGeocoding } from '../../helpers';
 import { Packages, Parcels } from '../../providers';
 
 @Component({
@@ -128,7 +130,6 @@ export class RegisterItemComponent implements OnInit {
     this.loading = true;
     const payload = this.addForm.value;
     payload.parcels = this.parcelsArray ? this.parcelsArray.map((item: Parcel) => item.id) : [];
-    payload.isCheckedOut = payload.paymentStatus === 'SUCCESS' ? true : false;
     payload.deliveryCoordinates = [5.4355, 7.9874];
     payload.pickupCoordinates = [5.4355, 7.9874];
 

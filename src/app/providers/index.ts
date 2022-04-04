@@ -1,3 +1,4 @@
+export * from './geocodings';
 export * from './packages';
 export * from './parcels';
 export * from './shipments';

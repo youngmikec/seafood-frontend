@@ -30,6 +30,7 @@ import {
 } from './services';
 
 import {
+  Geocodings,
   Packages,
   Parcels,
   Shipments,
@@ -99,7 +100,7 @@ import { AboutUsComponent } from './home/about-us/about-us.component';
     [{ provide: DEFAULT_TIMEOUT, useValue: 60000 }],
 
     UploadModalService,
-    Parcels, Packages, Shipments, Users, Trackings
+    Parcels, Packages, Shipments, Users, Trackings, Geocodings,
   ],
   bootstrap: [AppComponent]
 })

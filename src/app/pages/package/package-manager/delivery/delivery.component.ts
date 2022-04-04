@@ -45,7 +45,8 @@ export class DeliveryComponent implements OnInit {
 
   getRecords(){
     this.loading = true;
-    const queryString = `?sort=-createdAt&status=ARRIVED`;
+    let queryString = `?filter={"$or": [{"status": "ARRIVED"}, {"status": "DELIVERED"}]}`;
+    queryString += `&sort=-createdAt`;
     this.packages.recordRetrieve(queryString).then((res: any) => {
       if(res.success){
         this.loading = false;
@@ -62,7 +63,7 @@ export class DeliveryComponent implements OnInit {
     this.loading = true;
     const payload = this.deliveryForm.value;
     payload.status = 'DELIVERED';
-    this.packages.recordDeliver(this.currentRecord, payload).then(res => {
+    this.packages.packageOperation(this.currentRecord, payload).then(res => {
       if(res.success){
         this.showNotification('Package successfully delivered');
         this.getRecords();

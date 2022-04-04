@@ -18,6 +18,13 @@ export function pmtName(mysqlId: string | number) {
     return mysqlId;
 }
 
+export const DestructureGeocoding = (data: any): any => {
+    const { geometry: {location}, formatted_address } = data;
+    let address = formatted_address;
+    let coordinate = location;
+    return { address, coordinate };
+}
+
 // *****************************************************
 // ***********    DATE FUNCTIONS   *********************
 // *****************************************************

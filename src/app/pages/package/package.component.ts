@@ -36,9 +36,10 @@ export class PackageComponent implements OnInit {
     this.getRecords();
   }
 
-  getRecords(){
+  getRecords(): void {
     this.loading = true;
-    const queryString = `?sort=-createdAt&status=PENDING`;
+    let queryString = `?filter={"$and": [{"status": {"$ne": "ARRIVED"}}, {"status": {"$ne": "DELIVERED"}}]}`;
+    queryString += `&sort=-createdAt`;
     this.packages.recordRetrieve(queryString).then((res: any) => {
       if(res.success){
         this.loading = false;
@@ -49,6 +50,19 @@ export class PackageComponent implements OnInit {
       this.loading = false;
       this.showNotification(err);
     });
+  }
+
+  pickupPackage(record: Package): void {
+    const payload = { 
+      status: "PICKEDUP",
+      remark: "Good"
+    };
+    this.packages.packageOperation(record, payload).then(res => {
+      if(res.success){
+        this.showNotification(res.message);
+        this.getRecords();
+      }
+    }).catch((error: any) => this.showNotification(error));
   }
 
   openModal(size: string = 'xl', type: string, content: any = '', record: any = null): void {
@@ -97,7 +111,7 @@ export class PackageComponent implements OnInit {
 
   showNotification(message: string) {
     this.toastr.show(`<span class="now-ui-icons ui-1_bell-53"></span> <b>${message}</b>`, '', {
-      timeOut: 8000,
+      timeOut: 4000,
       closeButton: true,
       enableHtml: true,
       toastClass: 'alert alert-success alert-with-icon',

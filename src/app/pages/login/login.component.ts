@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     if(this.addForm?.valid){
         this.authService.postLogin(payload, '').then(res => {
           if(res.success){
-            this.showNotification("User login successful");
+            // this.showNotification("User login successful");
           }
         }).catch((err: any) => this.showNotification(err))
         .finally(() => {

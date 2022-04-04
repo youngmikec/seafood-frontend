@@ -4,12 +4,7 @@
         <div class="card-header pb-0">
           <div class="row">
             <div class="col-lg-6 col-7">
-              <!-- <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openXl('lg', content)">Add New</button> -->
               <h4>Package Records</h4>
-              <!-- <p class="text-sm mb-0">
-                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                <span class="font-weight-bold ms-1">30 done</span> this month
-              </p> -->
             </div>
            
           </div>
@@ -20,8 +15,6 @@
             <app-table [headers]="headers">
               <thead>
                 <tr>
-                  <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    *ngFor="let header of headers">{{ header }}</th> -->
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Package Code</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Package Name</th>
@@ -49,6 +42,7 @@
                         
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" (click)="openModal('lg', 'detail', content, record)">View</a>
+                            <a class="dropdown-item" *ngIf="record.status === 'CHECKEDOUT' " (click)="pickupPackage(record)">Pickup Package</a>
                             <!-- <a class="dropdown-item" (click)="openModal('lg', 'edit', content, record)">Edit</a> -->
                             <a class="dropdown-item" (click)="openModal('lg', 'delete', content, record)">Delete</a>
                           </div>
@@ -72,7 +66,7 @@
   <div class="modal-body">
         <div id="shipment-form" 
           *ngIf="formType === 'create' ||
-          formType === 'edit' "
+          formType === 'edit'"
         >
             <!-- <app-shipment-add [packageRecords]="returnedPackages" [formType]="formType" [record]="currentRecord" (changed)="getRecords()"></app-shipment-add> -->
         </div>
