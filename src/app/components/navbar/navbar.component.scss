@@ -38,6 +38,16 @@ ul li {
 @media screen and (max-width: 718px) {
     #hidden-div{
         display: block;
+        padding: 0;
+    }
+    #dropdownMenuLink{
+        padding-top: 0;
+    }
+
+    .navbar-brand{
+        font-size: .7rem;
+        margin-top: -10px;
+        padding: none;
     }
 
     .navigation-items{

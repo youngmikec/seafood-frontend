@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
-import { Parcel } from '../../models';
-import { DestructureGeocoding } from '../../helpers';
-import { Packages, Parcels } from '../../providers';
+import { Parcel, User } from '../../models';
+import { DestructureGeocoding, getLocalStorage } from '../../helpers';
+import { Packages, Parcels, Geocodings } from '../../providers';
 
 @Component({
   selector: 'app-register-item',
@@ -25,6 +25,8 @@ export class RegisterItemComponent implements OnInit {
   totalShipingCost: number = 0;
   loading: boolean = false;
   disabled: boolean = true;
+  deliveryCoordinates: Array<number> = [];
+  pickupCoordinates: Array<number> = [];
   parcelsArray: Array<Parcel> = [];
 
   constructor(
@@ -32,6 +34,7 @@ export class RegisterItemComponent implements OnInit {
     private parcels:  Parcels,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
+    private geocodings: Geocodings,
   ) { 
     this.createPackageForm();
     this.createParcelForm();
@@ -53,7 +56,6 @@ export class RegisterItemComponent implements OnInit {
       recipientEmail: ['', Validators.required],
       amountPayable: ['', Validators.required],
       paymentMethod: ['', Validators.required],
-      paymentStatus: ['PENDING', Validators.required],
       remark: ['', Validators.required],
     })
   }
@@ -122,16 +124,39 @@ export class RegisterItemComponent implements OnInit {
     this.totalItemsCost = 0;
     this.totalShipingCost = 0;
     this.parcelsArray = [];
+    this.deliveryCoordinates = [];
+    this.pickupCoordinates = [];
     this.currentStep = 1;
   }
 
+  getGeoCoordinate($event: any, name: any): void {
+    const { target } = $event;
+    const payload = {
+      address: target.value,
+      direction: 'forward'
+    }
+    this.geocodings.recordCreate(payload).then(res => {
+      if(res.success){
+        const { address, coordinate: {lat, lng} } = DestructureGeocoding(res.payload.results[0]);
+        if(name === 'deliveryAddress'){
+          this.deliveryCoordinates = [lat, lng];
+          console.log(this.deliveryCoordinates);
+        }
+        if(name === 'pickupAddress'){
+          this.pickupCoordinates = [lat, lng];
+        }
+        this.showNotification(`Coordinates found for specified address`);
+      }
+    }).catch((err: any) => this.showNotification(err));
+  }
 
   onSubmit(): void {
     this.loading = true;
     const payload = this.addForm.value;
     payload.parcels = this.parcelsArray ? this.parcelsArray.map((item: Parcel) => item.id) : [];
-    payload.deliveryCoordinates = [5.4355, 7.9874];
-    payload.pickupCoordinates = [5.4355, 7.9874];
+    payload.deliveryCoordinates = this.deliveryCoordinates;
+    payload.pickupCoordinates = this.pickupCoordinates;
+    payload.isCheckedOut = true;
 
     if(this.addForm.invalid){
       this.loading = false;
@@ -150,33 +175,12 @@ export class RegisterItemComponent implements OnInit {
         this.loading = false;
         this.addForm.reset();
         this.resetAllTransactionInfo();
-        this.showNotification(res.message);
+        this.showNotification('Package created successfully');
       }
     }).catch((err: any) => {
       this.loading = false;
       this.showNotification(err);
     });
-  }
-
-  SearchAddressGeoCode(direction: string){
-    // let address = this.addressForm.value;
-    // if(direction == 'from'){
-    //   this.geoCodings.getCoordinatesByAddress(address.locationFrom).then((res: any) => {
-    //     if(res){
-    //       this.locationFrom = res.results[0].locations[0].latLng;
-    //       this.showNotification('Coordinates found for specified location');
-    //     }
-    //   }).catch(err => this.showNotification('unable to get coordinates of the location'))
-    // }
-
-    // if(direction == 'to'){
-    //   this.geoCodings.getCoordinatesByAddress(address.locationTo).then((res: any) => {
-    //     if(res){
-    //       this.locationTo = res.results[0].locations[0].latLng;
-    //       this.showNotification('Coordinates found for specified location');
-    //     }
-    //   }).catch(err => this.showNotification('unable to get coordinates of the location'))
-    // }
   }
 
   showNotification(message: string) {

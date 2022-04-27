@@ -21,7 +21,7 @@
 <nav class="navbar navbar-dark bg-dark d-flex justify-content-between">
   <div class="container-fluid py-1">
 
-    <div class="flex">
+    <div class="flex navigation-items">
       <a class="navbar-brand" [routerLink]="['/home']">SeaWay</a>
     </div>
     <div class="flex navigation-items">
@@ -82,18 +82,22 @@
     </div>
 
 
-    <div class="flex lg:hidden text-dark" id="hidden-div">
+    <div class="flex lg:hidden text-dark d-flex justify-content-between" id="hidden-div">
       <a class=" dropdown">
         <a *ngIf="!isAuthenticated" class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="mx-2">Account</span>
         </a>
 
-        <a *ngIf="isAuthenticated" class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div *ngIf="isAuthenticated" class="flex navbar-brand">
+          <a class="" [routerLink]="['/home']">SeaWay</a>
+        </div>
+
+        <a *ngIf="isAuthenticated" class="btn dropdown-toggle flex" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="mx-3">{{ user?.surname }} {{ user?.firstName }}</span>
           <img [src]="user?.image || defaultAvatar" class="rounded-circle" width="40rem"  alt="">
         </a>
       
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu flex" aria-labelledby="dropdownMenuLink">
           <a *ngIf="!isAuthenticated" class="dropdown-item" [routerLink]="['/login']" routerLinkActive="router-link-active" >
             Login
           </a>

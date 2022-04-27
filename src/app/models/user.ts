@@ -25,6 +25,9 @@ export interface User {
    kin?:              string;
    kinPhone?:         string;
    kinAddress?:       string;
+   wallet?:           string | number;
+   walletPin?:        string;
+   balance?:          number;
  
    approvedBy?:       User;
    approvedDate?:     Date;
@@ -77,7 +80,10 @@ export class User {
    kin?:              string;
    kinPhone?:         string;
    kinAddress?:       string;
- 
+   wallet?:           string | number;
+   walletPin?:        string;
+   balance?:          number;
+
    approvedBy?:       User;
    approvedDate?:     Date;
    verifiedBy?:       User;
