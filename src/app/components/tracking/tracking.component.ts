@@ -62,15 +62,16 @@ export class TrackingComponent implements OnInit {
     }
     this.trackings.recordCreate(payload).then((res: any) => {
       if(res.success){
+        this.loading = false;
         this.currentRecord = res.payload;
         const { trackingCode } = this.currentRecord.result;
         this.changed.emit(this.currentRecord);
         this.trackingForm.reset();
         this.showNotification(res.message);
       }
-    }).catch((err: any) => this.showNotification(err))
-    .finally(() => {
+    }).catch((err: any) => {
       this.loading = false;
+      this.showNotification(err)
     })
   }
 

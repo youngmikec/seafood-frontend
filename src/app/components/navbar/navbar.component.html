@@ -1,7 +1,7 @@
 <!-- <nav class="navbar navbar-dark bg-dark">
   Navbar content
 
-  <a class="navbar-brand" href="#">SeaWay</a>
+  <a class="navbar-brand" href="#">Turah International</a>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
   <div class="container-fluid py-1">
 
     <div class="flex navigation-items">
-      <a class="navbar-brand" [routerLink]="['/home']">SeaWay</a>
+      <a class="navbar-brand" [routerLink]="['/home']">Turah International</a>
     </div>
     <div class="flex navigation-items">
       <ul class="list-inline list-unstyled d-inline">
@@ -62,12 +62,12 @@
                 Profile
               </a>
 
-              <a *ngIf="isAuthenticated" class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >
+              <!-- <a *ngIf="isAuthenticated" class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >
                 <span class="mx-3">
                   <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                 </span>
                 Transactions
-              </a>
+              </a> -->
 
               <a *ngIf="isAuthenticated" class="dropdown-item" (click)="logout()">
                 <span class="mx-3">
@@ -89,7 +89,7 @@
         </a>
 
         <div *ngIf="isAuthenticated" class="flex navbar-brand">
-          <a class="" [routerLink]="['/home']">SeaWay</a>
+          <a class="" [routerLink]="['/home']">Turah International</a>
         </div>
 
         <a *ngIf="isAuthenticated" class="btn dropdown-toggle flex" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -112,12 +112,12 @@
             Profile
           </a>
 
-          <a *ngIf="isAuthenticated" class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >
+          <!-- <a *ngIf="isAuthenticated" class="dropdown-item" [routerLink]="['/wallet/dashboard']" routerLinkActive="router-link-active" >
             <span class="mx-3">
               <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
             </span>
             Transactions
-          </a>
+          </a> -->
 
           <a *ngIf="isAuthenticated" class="dropdown-item" (click)="logout()">
             <span class="mx-3">

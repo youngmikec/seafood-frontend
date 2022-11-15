@@ -138,6 +138,7 @@ export class RegisterItemComponent implements OnInit {
     this.geocodings.recordCreate(payload).then(res => {
       if(res.success){
         const { address, coordinate: {lat, lng} } = DestructureGeocoding(res.payload.results[0]);
+        console.log(lat, lng);
         if(name === 'deliveryAddress'){
           this.deliveryCoordinates = [lat, lng];
           console.log(this.deliveryCoordinates);

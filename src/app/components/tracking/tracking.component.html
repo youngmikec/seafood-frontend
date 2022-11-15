@@ -7,7 +7,9 @@
         <div class="card-header pl-4">
             <form [formGroup]="trackingForm" (ngSubmit)="onSubmit()">
                 <input type="text" class="p-2" style="border: 1px solid lightgray;" class="w-75" formControlName="trackingCode" placeholder="Input tracking code">
-                <span class="ml-3 mt-3 btn btn-md btn-primary" (click)="onSubmit()">Search</span>
+                <span class="ml-3 mt-3 btn btn-md btn-primary" (click)="onSubmit()">
+                    {{ loading ? 'tracking' : 'Track' }}
+                </span>
             </form>
         </div>
     </div>

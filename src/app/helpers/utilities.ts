@@ -19,9 +19,9 @@ export function pmtName(mysqlId: string | number) {
 }
 
 export const DestructureGeocoding = (data: any): any => {
-    const { geometry: {location}, formatted_address } = data;
-    let address = formatted_address;
-    let coordinate = location;
+    const { geometry, formatted } = data;
+    let address = formatted;
+    let coordinate = geometry;
     return { address, coordinate };
 }
 
