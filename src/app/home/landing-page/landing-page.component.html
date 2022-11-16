@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div id="image-wrapper" class="col-lg-6 col-md-12 col-xs-12">
-                      <img src="../../../assets/img/apps.jpg" style="border-radius: 10px;" height="350em" width="200em" class="phone1" id="parallax-1" alt="alt image">
+                      <img src="../../../assets/img/apps.png" style="border-radius: 10px;" height="350em" width="200em" class="phone1" id="parallax-1" alt="alt image">
                       <!-- <img src="assets/img/samsung.png" class="phone2" id="parallax-2" alt="alt image"> -->
                     </div>
                 </div>
@@ -104,8 +104,8 @@
     <div id="hidden-image">
         <div class="section">
             <div class="display-title">
-                <div class="text-center pt-5">
-                    <h1 style="color: #ffffff;"> A system you can always trust</h1>
+                <div class="text-center" style="display: flex; justify-content: center; padding-top: 6rem;">
+                    <h1 style="color: #ffffff; margin: auto 0"> A system you can always trust</h1>
                 </div>
             </div>
         </div>
@@ -171,12 +171,11 @@
     
             <div class="col-md-4 text-center">
               <div class="px-4">
-                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/michael_c.jpeg"><div class="pt-0 text-center">
+                  <img class="img-fluid rounded-circle shadow" style="height: 150px; width: 150px;" src="../../../assets//img/michael_c.jpeg"><div class="pt-0 text-center">
                   <h5 class="title mt-3">
                     <span class="d-block mb-1">Ozor Michael</span>
-                    <small class="h6 text-muted">
+                    <small class="h6 text-muted text-justify">
                       "As soon as I saw this kit, everything else isn't the same anymore, I just can't describe it guys! Thank you for this work!"
-    
                     </small>
                   </h5>
                 </div>
@@ -185,7 +184,7 @@
     
             <div class="col-md-4 text-center">
               <div class="px-4">
-                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/marie.jpg"><div class="pt-0 text-center">
+                  <img class="img-fluid rounded-circle shadow" style="height: 150px; width: 150px;" src="../../../assets//img/marie.jpg"><div class="pt-0 text-center">
                   <h5 class="title mt-3">
                     <span class="d-block mb-1">Josh Franklin</span>
                     <small class="h6 text-muted"> "Great! Used this for a client already and he is over the moon. Keep up the good work Creative Tim! 10/10 for design, colours, and the feel of the kit."
@@ -197,7 +196,7 @@
     
             <div class="col-md-4 text-center">
               <div class="px-4">
-                  <img class="img-fluid rounded-circle shadow" src="../../../assets//img/team-2.jpg"><div class="pt-0 text-center">
+                  <img class="img-fluid rounded-circle shadow" style="height: 150px; width: 150px;" src="../../../assets//img/team-2.jpg"><div class="pt-0 text-center">
                   <h5 class="title mt-3">
                     <span class="d-block mb-1">Michael Onubogu</span>
                     <small class="h6 text-muted"> "Damn Daniel!!! This Design System is fresh AF! Amazing work!"</small>
@@ -208,50 +207,50 @@
           </div>
           
         </div>
-      </div>
-
-<app-footer></app-footer>
-
-<button #modalButton style="display: none;" (click)="openModal('lg', content)"></button>
-
-<ng-template #content let-modal>
-    <div class="modal-header container">
-        <h4 class="modal-title">Tracking Modal</h4>
-        <button type="button" class="btn text-dark" (click)="modal.close('Close click')">&times;</button>
-
     </div>
-    <div class="modal-body">
 
-        <div id="peep-modal">
-            <div class="container rounded shadow-sm card my-2">
-                <div class="card-body d-flex justify-content-between">
-                    <div class="flex">
-                        <h6>Tracking Code</h6>
-                        <p><small>{{ currentRecord?.result?.trackingCode }}</small></p>
-                    </div>
-                    
-                    <div class="flex">
-                        <h6>Current Location</h6>
-                        <p><small>{{ currentRecord?.trackingDetail?.currentLocation?.address }}</small></p>
-                    </div>
+    <app-footer></app-footer>
 
-                    <div class="flex">
-                        <h6>Current Location Coordinates</h6>
-                        <p><small>Latitude: {{ currentRecord?.trackingDetail?.currentLocation?.coordinates[0] }}</small></p>
-                        <p><small>Longitude: {{ currentRecord?.trackingDetail?.currentLocation?.coordinates[1] }}</small></p>
+    <button #modalButton style="display: none;" (click)="openModal('lg', content)"></button>
+
+    <ng-template #content let-modal>
+        <div class="modal-header container">
+            <h4 class="modal-title">Tracking Modal</h4>
+            <button type="button" class="btn text-dark" (click)="modal.close('Close click')">&times;</button>
+
+        </div>
+        <div class="modal-body">
+
+            <div id="peep-modal">
+                <div class="container rounded shadow-sm card my-2">
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="flex">
+                            <h6>Tracking Code</h6>
+                            <p><small>{{ currentRecord?.result?.trackingCode }}</small></p>
+                        </div>
+                        
+                        <div class="flex">
+                            <h6>Current Location</h6>
+                            <p><small>{{ currentRecord?.trackingDetail?.currentLocation?.address }}</small></p>
+                        </div>
+
+                        <div class="flex">
+                            <h6>Current Location Coordinates</h6>
+                            <p><small>Latitude: {{ currentRecord?.trackingDetail?.currentLocation?.coordinates[0] }}</small></p>
+                            <p><small>Longitude: {{ currentRecord?.trackingDetail?.currentLocation?.coordinates[1] }}</small></p>
+                        </div>
+                        
+                        <div class="flex">
+                            <h6>Shipment Status</h6>
+                            <p><small>{{ currentRecord?.trackingDetail?.status }}</small></p>
+                        </div>
+                        
                     </div>
-                    
-                    <div class="flex">
-                        <h6>Shipment Status</h6>
-                        <p><small>{{ currentRecord?.trackingDetail?.status }}</small></p>
-                    </div>
-                    
                 </div>
             </div>
         </div>
-    </div>
 
-</ng-template>
+    </ng-template>
   
   
     
