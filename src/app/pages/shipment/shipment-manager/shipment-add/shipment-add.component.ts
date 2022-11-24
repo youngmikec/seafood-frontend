@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 import { Shipment, Package } from '../../../../models';
-import { Shipments } from '../../../../providers';
+import { DestructureGeocoding } from '../../../../helpers';
+import { Geocodings, Shipments } from '../../../../providers';
 
 @Component({
   selector: 'app-shipment-add',
@@ -20,13 +21,17 @@ export class ShipmentAddComponent implements OnInit {
   //@ts-ignore
   updateForm: FormGroup;
   loading: boolean = false;
-  packagesArray: Array<string> = [];
+  packagesArray: Array<Package> = [];
+  locationFromCoordinates: number[] = [];
+  destinationCoordinates: number[] = [];
+  currentLocationCoordinates: number[] = [];
   
 
   constructor(
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private shipments: Shipments
+    private shipments: Shipments,
+    private geocodings: Geocodings,
   ) { 
     this.createAddForm();
     this.createUpdateForm();
@@ -92,21 +97,29 @@ export class ShipmentAddComponent implements OnInit {
 
   addToPackagesArray($event: any){
     if($event){
-      console.log('event', $event);
-      this.packagesArray.push($event.id);
-      this.showNotification('package added successfully');
+      const record = this.packageRecords.find((item: Package) => item.id === $event.target.value);
+      if(record){
+        console.log('event', record);
+        this.packagesArray.push(record);
+        this.showNotification('package added successfully');
+      }
     }
     return;
+  }
+
+  removeFromPackagesArray(id: string | undefined): void {
+    this.packagesArray = this.packagesArray.filter((item: Package) => item.id !== id);
+    this.showNotification('package removed successfully');
   }
 
   onSubmit(){
     this.loading = true;
     const payload = this.addForm.value;
-    payload.packages = this.packagesArray.length > 0 ? this.packagesArray : [];
-    payload.isVehicleFull = payload.isVehicleFull === 'true' || true ? true : false;
-    payload.locationFrom = {address: payload.locationFrom, coordinates: [32.3242, 65.7564]}
-    payload.destination = {address: payload.destination, coordinates: [32.3242, 65.7564]}
-    payload.currentLocation = {address: payload.currentLocation, coordinates: [32.3242, 65.7564]}
+    payload.packages = this.packagesArray.length > 0 ? this.packagesArray.map((item: Package) => item.id) : [];
+    payload.isVehicleFull = payload.isVehicleFull == 'true' || true ? true : false;
+    payload.locationFrom = {address: payload.locationFrom, coordinates: this.locationFromCoordinates}
+    payload.destination = {address: payload.destination, coordinates: this.destinationCoordinates}
+    payload.currentLocation = {address: payload.currentLocation, coordinates: this.currentLocationCoordinates}
 
     if(this.addForm.invalid){
       this.showNotification('Fill in all the required inputs');
@@ -114,25 +127,26 @@ export class ShipmentAddComponent implements OnInit {
 
     this.shipments.recordCreate(payload).then(res => {
       if(res.success){
+        this.loading = false;
         this.addForm.reset();
         this.changed.emit(true);
         this.showNotification(res.message);
       }
     })
-    .catch(err => this.showNotification(err))
-    .finally(() => {
+    .catch(err => {
       this.loading = false;
+      this.showNotification(err);
     })
   }
 
   onUpdate(){
     this.loading = true;
     const payload = this.updateForm.value;
-    payload.packages = payload.packages.length > 0 ? payload.packages.map((item: any) => item.id) : [];
-    payload.isVehicleFull = payload.isVehicleFull === 'true' || true ? true : false;
-    payload.locationFrom = {address: payload.locationFrom, coordinates: [32.3242, 65.7564]}
-    payload.destination = {address: payload.destination, coordinates: [32.3242, 65.7564]}
-    payload.currentLocation = {address: payload.currentLocation, coordinates: [32.3242, 65.7564]}
+    payload.packages = this.packagesArray.length > 0 ? this.packagesArray.map((item: Package) => item.id) : [];
+    payload.isVehicleFull = payload.isVehicleFull == 'true' || true ? true : false;
+    payload.locationFrom = {address: payload.locationFrom, coordinates: this.locationFromCoordinates}
+    payload.destination = {address: payload.destination, coordinates: this.destinationCoordinates}
+    payload.currentLocation = {address: payload.currentLocation, coordinates: this.currentLocationCoordinates}
 
 
     this.shipments.recordUpdate(this.record, payload).then(res => {
@@ -148,6 +162,29 @@ export class ShipmentAddComponent implements OnInit {
     .finally(() => {
       this.loading = false;
     })
+  }
+
+  getGeoCoordinate($event: any, name: any): void {
+    const { target } = $event;
+    const payload = {
+      address: target.value,
+      direction: 'forward'
+    }
+    this.geocodings.recordCreate(payload).then(res => {
+      if(res.success){
+        const { address, coordinate: {lat, lng} } = DestructureGeocoding(res.payload.results[0]);
+        if(name === 'destination'){
+          this.destinationCoordinates = [lat, lng];
+        }
+        if(name === 'locationFrom'){
+          this.locationFromCoordinates = [lat, lng];
+        }
+        if(name === 'currentLocation'){
+          this.currentLocationCoordinates = [lat, lng];
+        }
+        this.showNotification(`Coordinates found for specified address`);
+      }
+    }).catch((err: any) => this.showNotification(err));
   }
 
   showNotification(message: string) {
