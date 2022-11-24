@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 import { Parcel, User } from '../../models';
-import { DestructureGeocoding, getLocalStorage } from '../../helpers';
+import { categories } from '../../helpers';
+import { DestructureGeocoding } from '../../helpers';
 import { Packages, Parcels, Geocodings } from '../../providers';
 
 @Component({
@@ -28,6 +29,8 @@ export class RegisterItemComponent implements OnInit {
   deliveryCoordinates: Array<number> = [];
   pickupCoordinates: Array<number> = [];
   parcelsArray: Array<Parcel> = [];
+  parcelItems: Array<any> = [];
+  categoryOptions: string[] = [];
 
   constructor(
     private packages: Packages,
@@ -41,6 +44,7 @@ export class RegisterItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.categoryOptions = categories;
   }
 
   createPackageForm(){
@@ -94,19 +98,23 @@ export class RegisterItemComponent implements OnInit {
       this.showNotification('Fill in all the required Items field');
       return;
     }
-    this.parcels.recordCreate(payload).then(res => {
-      if(res.success){
-        this.parcelsArray.push(res.payload);
-        this.calculateCost(this.parcelsArray);
-        this.parcelForm.reset();
-        this.addForm.patchValue({
-          amountPayable: this.totalAmount
-        });
-        this.showNotification('Item successfully added');
-      }
-    }).catch((err: any) => {
-      this.showNotification(err + 'Check your internet connection and try again');
-    })
+    if(this.parcelItems.push(payload)){
+      this.parcels.estimateBilling({items: this.parcelItems}).then(res => {
+        if(res.success){
+          this.parcelForm.reset();
+          const { totalShippingFee, totalAmountPayable} = res.payload;
+          this.totalAmount = totalAmountPayable + totalShippingFee;
+          this.addForm.patchValue({
+            amountPayable: this.totalAmount
+          });
+          this.showNotification('Item successfully added');
+        }
+      }).catch((err: any) => {
+        this.showNotification('Error in estimating billing' + err);
+      })
+      
+    }
+    return;
   }
 
   // Caluclate total cost of Item and shipment fee;
@@ -154,7 +162,8 @@ export class RegisterItemComponent implements OnInit {
   onSubmit(): void {
     this.loading = true;
     const payload = this.addForm.value;
-    payload.parcels = this.parcelsArray ? this.parcelsArray.map((item: Parcel) => item.id) : [];
+    payload.amountPayable = parseInt(payload.amountPayable);
+    payload.parcels = this.parcelItems.length > 0 ? this.parcelItems : [];
     payload.deliveryCoordinates = this.deliveryCoordinates;
     payload.pickupCoordinates = this.pickupCoordinates;
     payload.isCheckedOut = true;
@@ -186,11 +195,11 @@ export class RegisterItemComponent implements OnInit {
 
   showNotification(message: string) {
     this.toastr.show(`<span class="now-ui-icons ui-1_bell-53"></span> <b>${message}</b>`, '', {
-        timeOut: 8000,
-        closeButton: true,
-        enableHtml: true,
-        toastClass: 'alert alert-primary alert-with-icon',
-      });
+      timeOut: 8000,
+      closeButton: true,
+      enableHtml: true,
+      toastClass: 'alert alert-primary alert-with-icon',
+    });
   }
 
 }

@@ -54,6 +54,27 @@ export const USER_ROLE = {
   "4": "USER",
 };
 
+export const categories: string[] = [
+  "Seafood",
+  "Tuber",
+  "Egusi", 
+  "Ogono",
+  "Ukwa",
+  "Ofo/achi",
+  "Rice",
+  "Beans",
+  "Garri",
+  "Groundnut oil",
+  "Stock fish",
+  "Dryfish",
+  "Yam",
+  "Cocoyam", 
+  "Casava",
+  "Pepper",
+  "Red onions",
+  "Tomatoes",
+]
+
 export const USER_TYPE = {
   SENDER: "SENDER",
   DISPATCHER: "DISPATCHER",
@@ -220,7 +241,7 @@ export const SMS = {
 };
 
 export const API = {
-  URL: "https://freexitnow.com",
+  URL: "https://seafood.com",
 };
 
 export const INPUT_TYPE = {

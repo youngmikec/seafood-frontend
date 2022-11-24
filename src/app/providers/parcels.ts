@@ -11,11 +11,14 @@ import { EnvService, ApiService } from '../services';
 
 export class Parcels {
     parcels: Array<Parcel> = [];
+    url: string = '';
 
     constructor(
-        private env: EnvService,
-        private apiService: ApiService
-    ){}
+      private env: EnvService,
+      private apiService: ApiService
+    ){
+      this.url = this.env.API_URL;
+    }
   
     query(params?: any) {
       if (!params) {
@@ -48,7 +51,7 @@ export class Parcels {
     // CRUD Service
     // async recordRetrieve(queryString = '?sort=-createdAt'): Promise<ApiResponse> {
     async recordRetrieve(queryString = '' ): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/parcel${queryString}`;
+      const url = `${this.url}/parcel${queryString}`;
       const proRes = this.apiService.getApi(url).pipe(
         map((res: ApiResponse) => {
           console.log(res);
@@ -65,7 +68,7 @@ export class Parcels {
     }
   
     async recordCreate(data: any): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/parcel`;
+      const url = `${this.url}/parcel`;
       const proRes = this.apiService.postApi(url, data).pipe(
         map((res: ApiResponse) => {
           if (res.success && res.payload) {
@@ -77,9 +80,23 @@ export class Parcels {
         }));
       return await proRes.toPromise();
     }
+
+    async estimateBilling(data: any): Promise<ApiResponse> {
+      const url = `${this.url}/parcel/billing`;
+      const proRes = this.apiService.postApi(url, data).pipe(
+        map((res: ApiResponse) => {
+          if (res.success && res.payload) {
+            console.log('billing estimate successful');
+          } else {
+            throwError(res.message);
+          }
+          return res;
+        }));
+      return await proRes.toPromise();
+    }
   
     async recordUpdate(record: Parcel | any, payload: any): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/parcel/${record.id}`;
+      const url = `${this.url}/parcel/${record.id}`;
       const proRes = this.apiService.updateApi(url, payload).pipe(
         map((res: ApiResponse) => {
           if (res.success) {
@@ -96,7 +113,7 @@ export class Parcels {
     }
   
     async recordDelete(record: Parcel): Promise<ApiResponse> {
-      const url = `${this.env.API_URL}/parcel/${record.id}`;
+      const url = `${this.url}/parcel/${record.id}`;
       const proRes = this.apiService.deleteApi(url).pipe(
         map((res: any) => {
           if (res.success) {

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // CURRENT_URL: 'http://localhost:3000/api',
-  CURRENT_URL: 'https://seafood-backend.onrender.com/api',
+  CURRENT_URL: 'http://localhost:3000/api',
+  // CURRENT_URL: 'https://seafood-backend.onrender.com/api',
   API_KEY: 'FREEXIT-e6db11d17773336208de8cb-Z'
  
 };
