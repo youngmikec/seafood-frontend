@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 import { User } from '../../models';
-import { Users } from '../../providers';
+import { Deposits, Users } from '../../providers';
 import { AuthService } from '../../services';
 
 @Component({
@@ -17,6 +17,8 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   //@ts-ignore
   passwordForm: FormGroup;
+  //@ts-ignore
+  depositForm: FormGroup;
   user: User;
   loading: boolean = false;
   resetting: boolean = false;
@@ -26,8 +28,11 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private deposits: Deposits,
   ) {
     this.createProfileForm();
+    this.createPasswordForm();
+    this.createDepositForm();
     this.user = this.authService.getUser();
    }
 
@@ -50,6 +55,17 @@ export class ProfileComponent implements OnInit {
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+    })
+  }
+
+  createDepositForm(): void {
+    this.depositForm = this.formBuilder.group({
+      amount: ['', Validators.required],
+      pin: ['', Validators.required],
+      depositorBank: ['', Validators.required],
+      depositorAcctName: ['', Validators.required],
+      depositorAcctNum: ['', Validators.required],
+      transactionStatus: ['', Validators.required],
     })
   }
 
@@ -78,17 +94,48 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  createDeposit(): void {
+    this.loading = true;
+    const payload = this.depositForm.value;
+    if(this.depositForm.invalid){
+      this.showNotification('Fill in the required fields!');
+      return;
+    }
+    this.deposits.recordCreate(payload).then(res => {
+      if(res.success){
+        this.loading = false;
+        this.depositForm.reset();
+        this.showNotification('Deposit successful');
+      }
+    }).catch(err => {
+      this.loading = false;
+      this.showNotification(err);
+    })
+  }
+
   resetPassword(): void {
     this.resetting = true;
     const payload = this.passwordForm.value;
-    this.users.recordUpdate(this.user, payload).then(res => {
+    const { newPassword, confirmPassword } = payload;
+    if(this.passwordForm.invalid){
+      this.showNotification('Fill in all required fields!')
+      return;
+    }
+    if(newPassword !== confirmPassword){
+      this.showNotification('Password does not match!')
+      return;
+    }
+    delete payload.confirmPassword;
+
+    this.users.passwordUpdate(payload).then(res => {
       if(res.success){
-        this.showNotification(res.message);
+        this.resetting = false;
+        this.passwordForm.reset();
+        this.showNotification('Password successfully changed');
       }
     }).catch((err: any) => {
-      this.showNotification(err);
-    }).finally(() => {
       this.resetting = false;
+      this.showNotification(err);
     });
   }
 

@@ -94,6 +94,15 @@ export class Users {
         }));
       return await proRes.toPromise();
     }
+
+    async passwordUpdate(payload: any): Promise<ApiResponse> {
+      const url = `${this.env.API_URL}/user/password-reset`;
+      const proRes = this.apiService.updateApi(url, payload).pipe(
+        map((res: ApiResponse) => {
+          return res;
+        }));
+      return await proRes.toPromise();
+    }
   
     async recordDelete(record: User | any): Promise<ApiResponse> {
       const url = `${this.env.API_URL}/user/${record.id}`;

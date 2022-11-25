@@ -1,9 +1,71 @@
 <app-navbar></app-navbar>
 
 <!-- Profile form -->
-<div class="row my-5">
-    <div class="col-12">
-        <div class="container mx-auto w-75">
+<div class="row my-5 container mx-auto">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="container mx-auto w-100">
+            <div class="card bg-gradient-dark">
+                <div class="card-body text-light">
+                    <h5 style="color: white;">Balance</h5>
+                    <h3 style="color: white;">{{ user?.balance | currency: 'NGN': 'symbol-narrow': '4.2-2' }}</h3>
+                </div>
+            </div>
+
+            <div class="my-4">
+                <form [formGroup]="depositForm" (ngSubmit)="createDeposit()">
+                    <!--Step 1-->
+                    <div>
+                        <div class="card p-3">
+                            <div class="card-header bg-gray-100">
+                                <h5 class="card-title">Deposit Form</h5>
+                            </div>
+                            
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="amount" class="control-label">Amount</label>
+                                    <input type="number" class="form-control" formControlName="amount" placeholder="amount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="depositorBank" class="control-label">Bank</label>
+                                    <input type="text" class="form-control" formControlName="depositorBank" placeholder="your bank">
+                                </div>
+                                <div class="form-group">
+                                    <label for="depositorAcctName" class="control-label">Account Name</label>
+                                    <input type="text" class="form-control" formControlName="depositorAcctName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="depositorAcctNum" class="control-label">Account Number</label>
+                                    <input type="text" class="form-control" formControlName="depositorAcctNum">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pin" class="control-label">pin</label>
+                                    <input type="password" class="form-control" max="5" formControlName="pin">
+                                </div>
+                                <div class="form-group">
+                                    <label for="transactionStatus" class="control-label">Transaction Status</label>
+                                    <select 
+                                        name="transactionStatus" 
+                                        class="form-control"
+                                        formControlName="transactionStatus"
+                                    >
+                                        <option value="SUCCESSFUL">SUCCESSFUL</option>
+                                        <option value="FAILED">FAILED</option>
+                                    </select>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-lg bg-dark text-white mx-2">Deposit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
+        <div class="container mx-auto w-100">
             <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                 <!--Step 1-->
                 <div>
@@ -51,8 +113,8 @@
 <!-- Password reset form -->
 <div class="row my-5">
     <div class="col-12">
-        <div class="container mx-auto w-75">
-            <form [formGroup]="passwordForm" (ngSubmit)="resetPassword()">
+        <div class="container mx-auto">
+            <form [formGroup]="passwordForm">
                 <!--Step 1-->
                 <div>
                     <div class="card p-3">
@@ -63,27 +125,32 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="oldPassword" class="control-label">Old Password</label>
-                                <input type="text" class="form-control" formControlName="oldPassword" placeholder="Old password">
+                                <input type="password" class="form-control" formControlName="oldPassword" placeholder="Old password">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label">New Password</label>
-                                <input type="text" class="form-control" formControlName="password" placeholder="new password">
+                                <input type="password" class="form-control" formControlName="newPassword" placeholder="new password">
                             </div>
                             <div class="form-group">
                                 <label for="confirmPassword" class="control-label">Confirm Password</label>
-                                <input type="text" class="form-control" formControlName="confirmPassword" placeholder="confirm password">
+                                <input type="password" class="form-control" formControlName="confirmPassword" placeholder="confirm password">
                             </div>
                             
                             <div class="form-group text-center">
-                                <button class="btn btn-lg bg-dark text-white mx-2">save</button>
+
+                                <button type="button" 
+                                    (click)="resetPassword()"
+                                    [disabled]="resetting"
+                                    class="btn bg-dark text-light my-4 mb-2 hovering ld-over"
+                                >
+                                    Change Password
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
             </form>
-
-
         </div>
         
     </div>

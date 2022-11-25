@@ -34,7 +34,7 @@ export class AuthService {
         // element.removeClass('running');
         //  console.log('auth.service: res =>', res);
         if (res.success) {
-          this.showNotification(`${res.message}l<br/>Welcome! SeaWay`);
+          this.showNotification(`${res.message}l<br/>Welcome! Turah International Logistics`);
           const { user, token } = res.payload;
           this.user = user;
           this.token = token;
