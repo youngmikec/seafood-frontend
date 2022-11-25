@@ -98,6 +98,8 @@ export class RegisterItemComponent implements OnInit {
       this.showNotification('Fill in all the required Items field');
       return;
     }
+
+    // calculate parcel items cost.
     if(this.parcelItems.push(payload)){
       this.parcels.estimateBilling({items: this.parcelItems}).then(res => {
         if(res.success){
@@ -117,15 +119,6 @@ export class RegisterItemComponent implements OnInit {
     return;
   }
 
-  // Caluclate total cost of Item and shipment fee;
-  calculateCost = (records: any) => {
-    const cummulativeAmount = records.map((item: any) => item.amountPayable).reduce((a: number, b: number) => a + b);
-    const cummulativeShippingFee = records.map((item: any) => item.shippingFee).reduce((a: number, b: number) => a + b);
-    this.totalItemsCost = cummulativeAmount;
-    this.totalShipingCost = cummulativeShippingFee;
-    this.totalAmount = cummulativeAmount + cummulativeShippingFee;
-    // return { amount: cummulativeAmount + cummulativeShippingFee };
-  }
 
   resetAllTransactionInfo(): void {
     this.totalAmount = 0;

@@ -10,6 +10,17 @@ export enum Gender {
     OTHER = "OTHER", 
 }
 
+export enum DEPOSIT_STATUS {
+    PENDING = 'PENDING',
+    APPROVED = 'APPROVED',
+    DECLINED = 'DECLINED'
+}
+
+export enum DEPOSIT_TRXNSTATUS {
+    FAILED = 'FAILED',
+    SUCCESSFUL = 'SUCCESSFUL',
+}
+
 export enum WALLET_STATUS {
     PENDING = "PENDING",
     APPROVED = "APPROVED",

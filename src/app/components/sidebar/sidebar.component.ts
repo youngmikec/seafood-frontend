@@ -33,6 +33,12 @@ export const ROUTES: RouteInfo[] = [
       { path: '/crm/mail', title: 'Mail', icon: 'users_single-02', class: '' },
     ]
   },
+  {
+    path: '/admin/deposit', title: 'Deposits', icon: 'ui-1_email-85', class: 'parent-nav',
+    sub: [
+      { path: '/crm/mail', title: 'Mail', icon: 'users_single-02', class: '' },
+    ]
+  },
 
   { path: '/admin/tracking', title: 'Tracking', icon: 'ui-1_email-85', class: 'parent-nav', sub: null },
   // { path: '', title: 'Log out', icon: 'ui-1_email-85', class: 'parent-nav', sub: null },

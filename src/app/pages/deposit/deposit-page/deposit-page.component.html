@@ -4,7 +4,7 @@
         <div class="card-header pb-0">
           <div class="row">
             <div class="col-lg-6 col-7">
-              <h4>Package Records</h4>
+              <h4>Deposit Records</h4>
             </div>
             <div class="text-center col-12">
               <span *ngIf="loading" style="font-size: 10px;">
@@ -12,19 +12,20 @@
                   <span class="sr-only">Loading...</span>
               </span>
             </div>
+           
           </div>
         </div>
 
         <div class="card-body px-0 pb-2">
           <div class="container-fluid">
-            <app-table [headers]="headers">
+            <app-table>
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">S/N</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Package Code</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Package Name</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sender</th>
-                  <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recipient</th> -->
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deposit Code</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trxn Status</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created On</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
@@ -34,9 +35,9 @@
                   <tr *ngFor="let record of currentRecords; let i = index">
                       <td>{{ i + 1 }}</td>
                       <td>{{ record?.code }}</td>
-                      <td>{{ record?.name }}</td>
-                      <td>{{ record?.senderName }} ({{ record?.senderPhone }})</td>
-                      <!-- <td>{{ record?.recipientName }} ({{ record?.recipientPhone }})</td> -->
+                      <td>{{ record?.amount | currency: 'NGN' : 'symbol-narrow' : '4.2-2' }}</td>
+                      <td>{{ record?.user?.firstName }} {{ record?.user?.lastName }}</td>
+                      <td>{{ record?.transactionStatus }}</td>
                       <td>{{ record?.status }}</td>
                       <td>{{ record?.createdAt | date }}</td>
                       <td>
@@ -47,7 +48,8 @@
                         
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" (click)="openModal('lg', 'detail', content, record)">View</a>
-                            <a class="dropdown-item" *ngIf="record.status === 'CHECKEDOUT' " (click)="pickupPackage(record)">Pickup Package</a>
+                            <a class="dropdown-item" *ngIf="record.status === 'PENDING' && record.transactionStatus === 'SUCCESSFUL' " (click)="handleDepositOperation(record, 'APPROVED')">Approve</a>
+                            <a class="dropdown-item" *ngIf="record.status === 'PENDING' && record.transactionStatus === 'SUCCESSFUL' " (click)="handleDepositOperation(record, 'DECLINED')">Decline</a>
                             <!-- <a class="dropdown-item" (click)="openModal('lg', 'edit', content, record)">Edit</a> -->
                             <a class="dropdown-item" (click)="openModal('lg', 'delete', content, record)">Delete</a>
                           </div>
@@ -69,65 +71,41 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
   </div>
   <div class="modal-body">
-        <div id="shipment-form" 
+        <div id="deposit-form" 
           *ngIf="formType === 'create' ||
           formType === 'edit'"
         >
             <!-- <app-shipment-add [packageRecords]="returnedPackages" [formType]="formType" [record]="currentRecord" (changed)="getRecords()"></app-shipment-add> -->
         </div>
 
-        <div id="package-detail" 
+        <div id="deposite-detail" 
           *ngIf="formType === 'detail'">
-            <app-package-detail [record]="currentRecord"></app-package-detail>
-        </div>
-
-        <div id="peep-modal" *ngIf="formType === 'peep' ">
-            <div class="container rounded shadow-sm card my-2" *ngFor="let package of currentRecord.packages">
-                <div class="card-body d-flex justify-content-between">
-                    <div class="flex">
-                        <h6>Package Code</h6>
-                        <p><small>{{ package?.code }}</small></p>
-                    </div>
-                    
-                    <div class="flex">
-                        <h6>Package Name</h6>
-                        <p><small>{{ package?.name }}</small></p>
-                    </div>
-                    
-                    <div class="flex">
-                        <h6>Pickup Address</h6>
-                        <p><small>{{ package?.pickupAddress }}</small></p>
-                    </div>
-                    
-                    <div class="flex">
-                        <h6>Delivery Address</h6>
-                        <p><small>{{ package?.deliveryAddress }}</small></p>
-                    </div>
-                </div>
-            </div>
+            <app-deposit-detail [record]="currentRecord"></app-deposit-detail>
         </div>
 
         <div id="delete-modal" *ngIf="formType === 'delete' ">
           <div class="container rounded shadow-sm card">
             <div class="card-body d-flex justify-content-between">
                 <div class="flex">
-                    <h6>Package Code</h6>
+                    <h6>Deposit Code</h6>
                     <p><small>{{ currentRecord?.code }}</small></p>
                 </div>
                 
                 <div class="flex">
-                    <h6>No of items</h6>
-                    <p><small>{{ currentRecord?.parcels?.length }}</small></p>
+                    <h6>Amount</h6>
+                    <p><small>{{ currentRecord?.amount }}</small></p>
                 </div>
                 
                 <div class="flex">
-                    <h6>Originating Address</h6>
-                    <p><small>{{ currentRecord?.pickupAddress }}</small></p>
+                    <h6>User Bank details</h6>
+                    <p><small>{{ currentRecord?.depositorBank }}</small></p>
+                    <p><small>{{ currentRecord?.depositorAcctName }}</small></p>
+                    <p><small>{{ currentRecord?.depositorAcctNum }}</small></p>
                 </div>
                 
                 <div class="flex">
-                    <h6>Destination Address</h6>
-                    <p><small>{{ currentRecord?.deliveryAddress }}</small></p>
+                    <h6>Status</h6>
+                    <p><small>{{ currentRecord?.status }}</small></p>
                 </div>
             </div>
           </div>

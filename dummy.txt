@@ -1,0 +1,42 @@
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="senderName" class="control-label"><strong>Sender Name*</strong></label>
+            <input type="text" formControlName="senderName" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="senderPhone" class="control-label"><strong>Sender Phone*</strong></label>
+            <input type="text" formControlName="senderPhone" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="senderEmail" class="control-label"><strong>Sender Email*</strong></label>
+            <input type="email" formControlName="senderEmail" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="recipientName" class="control-label"><strong>Recipient Name*</strong></label>
+            <input type="text" formControlName="recipientName" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="recipientPhone" class="control-label"><strong>Recipient Phone*</strong></label>
+            <input type="text" formControlName="recipientPhone" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="recipientEmail" class="control-label"><strong>Recipient Email*</strong></label>
+            <input type="email" formControlName="recipientEmail" class="form-control">
+        </div>
+    </div>

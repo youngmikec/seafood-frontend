@@ -25,7 +25,7 @@ export class ParcelComponent implements OnInit {
   currentRecords: Array<Parcel> = [];
   headers: Array<string> = ['S/N', 'Name'];
   sidebarContent: string = '';
-  currentSelectedParcels: Array<any> = [];
+  currentSelectedParcels: Array<Parcel> = [];
   //@ts-ignore
   packageForm: FormGroup;
   modalType: string = '';
@@ -111,23 +111,35 @@ export class ParcelComponent implements OnInit {
     }).catch((err: any) => this.showNotification(err));
   } 
 
-  calculateCost = (records: any) => {
-    const cummulativeAmount = records.map((item: any) => item.amountPayable).reduce((a: number, b: number) => a + b);
-    const cummulativeShippingFee = records.map((item: any) => item.shippingFee).reduce((a: number, b: number) => a + b);
-    return { amount: cummulativeAmount + cummulativeShippingFee };
+  calculateCost = (records: Parcel[]) => {
+    let mappedRecords = records.map((item: Parcel) => ({ 
+      worth: item.worth, 
+      mass: item.mass,
+      quantity: item.quantity,
+      volume: item.volume
+    }))
+    this.parcels.estimateBilling({items: mappedRecords}).then(res => {
+      if(res.success){
+        const { totalShippingFee, totalAmountPayable} = res.payload;
+        this.totalAmount = totalAmountPayable + totalShippingFee;
+        this.packageForm.patchValue({
+          amountPayable: this.totalAmount
+        })
+        this.showNotification('Billing estimated successfully');
+      }
+    }).catch((err: any) => {
+      this.showNotification('Error in estimating billing' + err);
+    })
   }
 
   onSelectChange(event: Parcel | any) {
     const found = this.currentSelectedParcels.filter(option => option.id === event.id);
     if (found.length < 1) {
       this.currentSelectedParcels.push(event);
-      const { amount } = this.calculateCost(this.currentSelectedParcels);
-      this.totalAmount = amount;
+      this.calculateCost(this.currentSelectedParcels);
     } else {
       this.currentSelectedParcels = this.currentSelectedParcels.filter(option => option.id !== event.id);
-      const { amount } = this.calculateCost(this.currentSelectedParcels);
-      this.totalAmount = amount;
-      console.log('The current selected parcels ==> ', this.currentSelectedParcels);
+      this.calculateCost(this.currentSelectedParcels);
     }
     return;
   }

@@ -7,6 +7,7 @@ import { ParcelManagerComponent } from '../../pages/parcel/parcel-manager/parcel
 import { PackageManagerComponent } from '../../pages/package/package-manager/package-manager.component';
 import { ShipmentManagerComponent } from '../../pages/shipment/shipment-manager/shipment-manager.component';
 import { AdminTrackingComponent } from '../../pages/admin-tracking/admin-tracking.component';
+import { DepositManagerComponent } from 'src/app/pages/deposit/deposit-manager/deposit-manager.component';
 
 const routes: Routes = [
   { path: '**', redirectTo: 'home' },
@@ -23,6 +24,9 @@ const routes: Routes = [
 
   { path: 'shipment',    component: ShipmentManagerComponent, 
     children: [{ path: '',   loadChildren: () => import('../../pages/shipment/shipment.module').then(m => m.ShipmentModule)}]
+  },
+  { path: 'deposit',    component: DepositManagerComponent, 
+    children: [{ path: '',   loadChildren: () => import('../../pages/deposit/deposit.module').then(m => m.DepositModule)}]
   },
   { path: 'tracking',    component: AdminTrackingComponent },
   

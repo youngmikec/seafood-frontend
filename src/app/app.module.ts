@@ -30,6 +30,7 @@ import {
 } from './services';
 
 import {
+  Deposits,
   Geocodings,
   Packages,
   Parcels,
@@ -99,7 +100,7 @@ import { AboutUsComponent } from './home/about-us/about-us.component';
     { provide: LocationStrategy,  useClass: HashLocationStrategy },
     [{ provide: DEFAULT_TIMEOUT, useValue: 60000 }],
 
-    UploadModalService,
+    UploadModalService, Deposits,
     Parcels, Packages, Shipments, Users, Trackings, Geocodings,
   ],
   bootstrap: [AppComponent]

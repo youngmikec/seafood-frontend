@@ -14,7 +14,9 @@
                   <tr><th>Code</th><td>{{ record?.code }}</td></tr>                  
                   <tr><th>No of Items</th><td>{{ record?.parcels.length }}</td></tr>                  
                   <tr><th>Sender</th><td>{{ record?.senderName }} ({{ record?.senderPhone }})</td></tr>                  
+                  <tr><th>Sender Email</th><td>{{ record?.senderEmail }}</td></tr>                  
                   <tr><th>Receiver</th><td>{{ record?.recipientName }} ({{ record?.recipientPhone }})</td></tr>                  
+                  <tr><th>Receiver Email</th><td>{{ record?.recipientEmail }}</td></tr>                  
                   <tr><th>Paid?</th><td>{{ record?.isCheckedOut ? 'Paid' : 'Not Paid' }}</td></tr>                  
                   <tr><th>Amount Paid</th><td>{{ record?.amountPayable | currency: 'NGN' : 'symbol-narrow' : '4.2-2' }}</td></tr>                  
                   <tr><th>Payment Method</th><td>{{ record?.paymentMethod }}</td></tr>                  

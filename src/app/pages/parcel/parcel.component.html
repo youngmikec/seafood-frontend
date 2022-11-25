@@ -17,6 +17,7 @@
               <h4>Parcels Today</h4>
               
             </div>
+
             <div class="col-lg-6 col-5 my-auto text-end">
               <div class="dropdown float-lg-end pe-4">
                 <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,6 +29,13 @@
                   <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
                 </ul>
               </div>
+            </div>
+
+            <div class="text-center col-12">
+              <span *ngIf="loading" style="font-size: 10px;">
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                  <span class="sr-only">Loading...</span>
+              </span>
             </div>
           </div>
         </div>

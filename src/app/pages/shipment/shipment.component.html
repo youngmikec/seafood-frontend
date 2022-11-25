@@ -6,11 +6,8 @@
             <div class="col-lg-6 col-7">
               <button class="btn btn-primary mb-2 me-2 flex-1" (click)="openModal('lg', 'create', content)">Add New</button>
               <h4>Shipment Records</h4>
-              <!-- <p class="text-sm mb-0">
-                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                <span class="font-weight-bold ms-1">30 done</span> this month
-              </p> -->
             </div>
+
             <div class="col-lg-6 col-5 my-auto text-end">
               <div class="dropdown float-lg-end pe-4">
                 <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
@@ -22,6 +19,13 @@
                   <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
                 </ul>
               </div>
+            </div>
+
+            <div class="text-center col-12">
+              <span *ngIf="loading" style="font-size: 10px;">
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                  <span class="sr-only">Loading...</span>
+              </span>
             </div>
           </div>
         </div>
