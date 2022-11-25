@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Package Detail</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary"><th>Property</th><th>Value</th></thead>
+                  <tbody>
+                  <tr><th>Amount</th><td>{{ record?.amount | currency: 'NGN' : 'symbol-narrow': '4.2-2' }}</td></tr>
+                  <tr><th>Code</th><td>{{ record?.code }}</td></tr>                  
+                  <tr><th>User</th><td>{{ record?.user?.firstName }} {{ record?.user?.lastName }}</td></tr>                  
+                  <tr><th>Depositors Bank</th><td>{{ record?.depositorBank }}</td></tr>                  
+                  <tr><th>Depositors Account Name</th><td>{{ record?.depositorAcctName }}</td></tr>                  
+                  <tr><th>Depositors Account Number</th><td>{{ record?.depositorAcctNum }}</td></tr>                                    
+                  <tr><th>Status</th><td>{{ record?.status }}</td></tr>                  
+                  <tr><th>Transaction Status</th><td>{{ record?.transactionStatus }}</td></tr>                  
+                  <tr><th>Date created</th><td>{{ record?.createdAt | date }}</td></tr>
+                  <tr><th>Date updated</th><td>{{ record?.updatedAt | date }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
