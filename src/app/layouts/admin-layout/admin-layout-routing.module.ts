@@ -7,7 +7,8 @@ import { ParcelManagerComponent } from '../../pages/parcel/parcel-manager/parcel
 import { PackageManagerComponent } from '../../pages/package/package-manager/package-manager.component';
 import { ShipmentManagerComponent } from '../../pages/shipment/shipment-manager/shipment-manager.component';
 import { AdminTrackingComponent } from '../../pages/admin-tracking/admin-tracking.component';
-import { DepositManagerComponent } from 'src/app/pages/deposit/deposit-manager/deposit-manager.component';
+import { DepositManagerComponent } from '../../pages/deposit/deposit-manager/deposit-manager.component';
+import { AdminProfileComponent } from '../../pages/admin-profile/admin-profile.component';
 
 const routes: Routes = [
   { path: '**', redirectTo: 'home' },
@@ -29,6 +30,7 @@ const routes: Routes = [
     children: [{ path: '',   loadChildren: () => import('../../pages/deposit/deposit.module').then(m => m.DepositModule)}]
   },
   { path: 'tracking',    component: AdminTrackingComponent },
+  { path: 'profile',    component: AdminProfileComponent },
   
 ];
 

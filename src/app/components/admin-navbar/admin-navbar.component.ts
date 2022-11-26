@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-navbar.component.scss']
 })
 export class AdminNavbarComponent implements OnInit {
-
-  constructor() { }
+  defaultAvatar: string = '../../../assets/img/user-avatar.jpg';
+  user: User;
+  constructor(
+    private authService: AuthService
+  ) {
+    this.user = this.authService.getUser();
+  }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.authService.userLogOut();
   }
 
 }
