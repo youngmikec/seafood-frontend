@@ -27,31 +27,24 @@ export class AuthService {
 
   async postLogin(data: {[keys: string]: string | any}, element: any): Promise<LoginResponse> {
     const payload = cleanObject(data);
-    // console.log('auth.service: payload =>', payload, this.env.API_URL + '/admin/login');
     this.env.API_URL + '/admin/login'
     const response = this.http.post(`${this.env.API_URL}${data.userType === 'ADMIN' ? '/admin/login' : '/user/login' }`, payload)
       .pipe(tap((res: LoginResponse) => {
-        // element.removeClass('running');
-        //  console.log('auth.service: res =>', res);
         if (res.success) {
           this.showNotification(`${res.message}l<br/>Welcome! Turah International Logistics`);
           const { user, token } = res.payload;
           this.user = user;
           this.token = token;
           if (setLocalStorage('user', user, null)) {
-            //  console.log('User info stored');
           } else {
             console.error('Error storing record customer');
           }
           if (setLocalStorage('token', token, null)) {
-            //   console.log('Token string stored');
           } else {
             console.error('Error storing record token');
           }
-          // const goingTo = payload.otp ? '/forgot-password' :  '/admin/dashboard';
           const goingTo = data.userType !== 'ADMIN' ? '/home' :  '/admin/dashboard';
           this.isLoggedIn = true;
-          // const intendURL = getLocalStorage('intendURL') === null ? goingTo : getLocalStorage('intendURL');
           this.router.navigate([goingTo]);
         } else {
           this.showNotification(res.message);
