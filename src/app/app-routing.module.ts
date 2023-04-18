@@ -12,6 +12,7 @@ import { TrackingComponent } from './components/tracking/tracking.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { OfficesComponent } from './home/offices/offices.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
+import { SolutionComponent } from './home/solution/solution.component';
 
 
 const routes: Routes = [
@@ -20,12 +21,12 @@ const routes: Routes = [
   { path: 'home',                      component: LandingPageComponent },
   { path: 'register-item',             component: RegisterItemComponent, canActivate: [AuthGuard] },
   { path: 'tracking',                  component: TrackingComponent },
-  // { path: 'login',   loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   { path: 'login',                     component: LoginComponent },
   { path: 'signup',                    component: SignupComponent },
   { path: 'profile',                   component: ProfileComponent },
-  { path: 'offices',                   component: OfficesComponent },
+  { path: 'blogs',                     component: OfficesComponent },
   { path: 'about-us',                  component: AboutUsComponent },
+  { path: 'solutions',                 component: SolutionComponent },
   // { path: 'login-otp',              component: LoginOtpComponent },
   // { path: 'forgot-password',        component: ForgotPasswordComponent },
 

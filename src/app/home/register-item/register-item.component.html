@@ -5,8 +5,9 @@
     <div class="text-center">
         <h3 style="font-weight: 800;">Serving you is our drive force!</h3>
         <p>
-            Turah International Logistic is your on-demand delivery companion. It is specially built for 
-            fast and reliable pick-up/delivery service. Turah International Logistic is your most convenient means of sending items within and across cities. Turah International Logistic eliminates the need to
+            Supply Vortex International Logistic is your on-demand delivery companion. It is specially built for
+            fast and reliable pick-up/delivery service. Supply Vortex International Logistic is your most convenient
+            means of sending items within and across cities. Supply Vortex International Logistic eliminates the need to
             leave your home or comfort zone, trying to dispatch items for delivery.
         </p>
     </div>
@@ -25,27 +26,33 @@
                                     <div class="card-header py-2 bg-gray-100">
                                         <h5 class="card-title">Package Info</h5>
                                     </div>
-                                    
+
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="name" class="control-label">Name</label>
-                                            <input type="text" class="form-control" formControlName="name" placeholder="package name">
+                                            <input type="text" class="form-control" formControlName="name"
+                                                placeholder="package name">
                                         </div>
                                         <div class="form-group">
                                             <label for="pickupAddress" class="control-label">Pickup Address</label>
-                                            <input type="text" class="form-control" (change)="getGeoCoordinate($event, 'pickupAddress')" formControlName="pickupAddress" placeholder="pickup address">
+                                            <input type="text" class="form-control"
+                                                (change)="getGeoCoordinate($event, 'pickupAddress')"
+                                                formControlName="pickupAddress" placeholder="pickup address">
                                         </div>
                                         <div class="form-group">
                                             <label for="deliveryAddress" class="control-label">Delivery Address</label>
-                                            <input type="text" class="form-control" (change)="getGeoCoordinate($event, 'deliveryAddress')" formControlName="deliveryAddress" placeholder="delivery address">
+                                            <input type="text" class="form-control"
+                                                (change)="getGeoCoordinate($event, 'deliveryAddress')"
+                                                formControlName="deliveryAddress" placeholder="delivery address">
                                         </div>
                                         <div class="form-group text-center">
-                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="incrementCounter()">Next</button>
+                                            <button class="btn btn-lg bg-dark text-white mx-2"
+                                                (click)="incrementCounter()">Next</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <!--Step 2-->
                             <div *ngIf="currentStep == 2">
                                 <div class="card">
@@ -55,19 +62,22 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="senderName" class="control-label">Sender Name</label>
-                                            <input type="text" class="form-control" formControlName="senderName" required="true" placeholder="Sender's name">
+                                            <input type="text" class="form-control" formControlName="senderName"
+                                                required="true" placeholder="Sender's name">
                                         </div>
                                         <div class="form-group">
                                             <label for="senderPhone" class="control-label">Sender Phone</label>
-                                            <input type="text" class="form-control" formControlName="senderPhone" required="true" placeholder="+23409858">
+                                            <input type="text" class="form-control" formControlName="senderPhone"
+                                                required="true" placeholder="+23409858">
                                         </div>
                                         <div class="form-group">
                                             <label for="senderEmail" class="control-label">Sender Email</label>
-                                            <input type="email" class="form-control" formControlName="senderEmail" required="true" placeholder="example@gmail.com">
+                                            <input type="email" class="form-control" formControlName="senderEmail"
+                                                required="true" placeholder="example@gmail.com">
                                         </div>
                                     </div>
                                 </div>
-        
+
                                 <br>
                                 <br>
                                 <div class="card">
@@ -77,26 +87,31 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="recipientName" class="control-label">Recipient Name</label>
-                                            <input type="text" class="form-control" formControlName="recipientName" required="true" placeholder="Recipient's name">
+                                            <input type="text" class="form-control" formControlName="recipientName"
+                                                required="true" placeholder="Recipient's name">
                                         </div>
                                         <div class="form-group">
                                             <label for="recipientPhone" class="control-label">Recipient Phone</label>
-                                            <input type="text" class="form-control" formControlName="recipientPhone" required="true" placeholder="+23409858">
+                                            <input type="text" class="form-control" formControlName="recipientPhone"
+                                                required="true" placeholder="+23409858">
                                         </div>
                                         <div class="form-group">
                                             <label for="recipientEmail" class="control-label">Recipient Email</label>
-                                            <input type="email" class="form-control" formControlName="recipientEmail" required="true" placeholder="example@gmail.com">
+                                            <input type="email" class="form-control" formControlName="recipientEmail"
+                                                required="true" placeholder="example@gmail.com">
                                         </div>
 
                                         <br>
                                         <div class="form-group text-center">
-                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2" (click)="decreaseCounter()">BAck</button>
-                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="incrementCounter()">Next</button>
+                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2"
+                                                (click)="decreaseCounter()">BAck</button>
+                                            <button class="btn btn-lg bg-dark text-white mx-2"
+                                                (click)="incrementCounter()">Next</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <!--Step 3-->
                             <div *ngIf="currentStep == 3">
                                 <div class="card">
@@ -107,50 +122,62 @@
                                         <form [formGroup]="parcelForm">
                                             <div class="form-group">
                                                 <label for="name" class="control-label">Item Name</label>
-                                                <input type="text" class="form-control" formControlName="name" required="true" placeholder="">
+                                                <input type="text" class="form-control" formControlName="name"
+                                                    required="true" placeholder="">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="description" class="control-label">Item description</label>
-                                                <input type="text" class="form-control" formControlName="description" required="true" placeholder="More detail about the item">
+                                                <input type="text" class="form-control" formControlName="description"
+                                                    required="true" placeholder="More detail about the item">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="category" class="control-label">Category</label>
-                                                <select name="category" id="category" formControlName="category" class="form-control">
+                                                <select name="category" id="category" formControlName="category"
+                                                    class="form-control">
                                                     <option value="">Select category</option>
-                                                    <option *ngFor="let category of categoryOptions" value="{{category}}">{{category}}</option>
+                                                    <option *ngFor="let category of categoryOptions"
+                                                        value="{{category}}">{{category}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="quantity" class="control-label">Quantity</label>
-                                                <input type="number" class="form-control" formControlName="quantity" required="true">
+                                                <input type="number" class="form-control" formControlName="quantity"
+                                                    required="true">
                                             </div>
                                             <div class="form-group">
                                                 <label for="mass" class="control-label">Mass</label>
-                                                <input type="number" class="form-control" formControlName="mass" required="true">
+                                                <input type="number" class="form-control" formControlName="mass"
+                                                    required="true">
                                             </div>
-    
+
                                             <div class="form-group">
                                                 <label for="volume" class="control-label">Volume</label>
-                                                <input type="number" class="form-control" formControlName="volume" required="true">
+                                                <input type="number" class="form-control" formControlName="volume"
+                                                    required="true">
                                             </div>
-    
+
                                             <div class="form-group">
-                                                <label for="worth" class="control-label">Item Worth (price in Naira)</label>
-                                                <input type="number" class="form-control" formControlName="worth" required="true">
+                                                <label for="worth" class="control-label">Item Worth (price in
+                                                    Naira)</label>
+                                                <input type="number" class="form-control" formControlName="worth"
+                                                    required="true">
                                             </div>
-    
+
                                             <div class="form-group">
-                                                <label for="identification" class="control-label">Method to identify Recipient</label>
-                                                <select name="identification" id="identification" formControlName="identification" class="form-control">
+                                                <label for="identification" class="control-label">Method to identify
+                                                    Recipient</label>
+                                                <select name="identification" id="identification"
+                                                    formControlName="identification" class="form-control">
                                                     <option value="NATIONAL_ID">National Id</option>
                                                     <option value="DRIVERS_LICENSE">Driver's License</option>
                                                 </select>
                                             </div>
 
                                             <div class="form-group text-center">
-                                                <button class="btn btn-lg bg-dark text-white mx-2" (click)="createAndAddParcel($event)">
+                                                <button class="btn btn-lg bg-dark text-white mx-2"
+                                                    (click)="createAndAddParcel($event)">
                                                     {{ parcelItems.length > 0 ? 'Add another item' : 'Add Item'}}
                                                 </button>
                                             </div>
@@ -159,13 +186,15 @@
 
                                         <br>
                                         <div class="form-group text-center">
-                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2" (click)="decreaseCounter()">BAck</button>
-                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="incrementCounter()">Next</button>
+                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2"
+                                                (click)="decreaseCounter()">BAck</button>
+                                            <button class="btn btn-lg bg-dark text-white mx-2"
+                                                (click)="incrementCounter()">Next</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <!--Step 4-->
                             <div *ngIf="currentStep == 4">
                                 <div class="card">
@@ -175,18 +204,23 @@
 
                                     <div class="card-body">
                                         <div class="alert alert-success" *ngIf="parcelsArray.length > 0">
-                                            <span class="m-2"><small>Number of Items: </small> <strong>{{ parcelsArray.length }}</strong></span>
-                                            <span class="m-2"><small>Suggested Amount to Pay: </small> <strong>{{ totalAmount }}</strong></span>
+                                            <span class="m-2"><small>Number of Items: </small> <strong>{{
+                                                    parcelsArray.length }}</strong></span>
+                                            <span class="m-2"><small>Suggested Amount to Pay: </small> <strong>{{
+                                                    totalAmount }}</strong></span>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="amountPayable" class="control-label">Total Amount</label>
-                                            <input type="text" class="form-control" value="totalAmount" formControlName="amountPayable" [disabled]="disabled"  required="true" placeholder="">
+                                            <input type="text" class="form-control" value="totalAmount"
+                                                formControlName="amountPayable" [disabled]="disabled" required="true"
+                                                placeholder="">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="paymentMethod" class="control-label">Payment Method</label>
-                                            <select name="paymentMethod" id="paymentMethod" formControlName="paymentMethod" class="form-control">
+                                            <select name="paymentMethod" id="paymentMethod"
+                                                formControlName="paymentMethod" class="form-control">
                                                 <!-- <option value="CASH">Cash</option> -->
                                                 <option value="TRANSFER">Transfer</option>
                                                 <option value="WALLET">Wallet</option>
@@ -195,14 +229,17 @@
 
                                         <div class="form-group">
                                             <label for="remark" class="control-label">Remark</label>
-                                            <input type="text" class="form-control" formControlName="remark" required="true">
+                                            <input type="text" class="form-control" formControlName="remark"
+                                                required="true">
                                         </div>
 
 
                                         <br>
                                         <div class="form-group text-center">
-                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2" (click)="decreaseCounter()">BAck</button>
-                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="onSubmit()">{{ loading ? 'creating' : 'Finish'}}</button>
+                                            <button class="btn btn-lg btn-outline-dark text-dark mx-2"
+                                                (click)="decreaseCounter()">BAck</button>
+                                            <button class="btn btn-lg bg-dark text-white mx-2" (click)="onSubmit()">{{
+                                                loading ? 'creating' : 'Finish'}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +248,7 @@
                         </form>
                     </div>
 
-                        
+
 
                     <!-- <div class="my-4">
                         <button class="btn btn-lg bg-dark text-white">
@@ -222,8 +259,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
     </div>
 </div>
 

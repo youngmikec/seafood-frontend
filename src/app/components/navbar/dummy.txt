@@ -1,7 +1,7 @@
 <!-- <nav class="navbar navbar-dark bg-dark">
   Navbar content
 
-  <a class="navbar-brand" href="#">Turah International</a>
+  <a class="navbar-brand" href="#">Supply Vortex International</a>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
   <div class="container-fluid py-1">
 
     <div class="flex navigation-items">
-      <a class="navbar-brand" [routerLink]="['/home']">Turah International</a>
+      <a class="navbar-brand" [routerLink]="['/home']">Supply Vortex International</a>
     </div>
 
     <div class="flex navigation-items">
@@ -90,7 +90,7 @@
         </a>
 
         <div *ngIf="isAuthenticated" class="flex navbar-brand">
-          <a class="" [routerLink]="['/home']">Turah International</a>
+          <a class="" [routerLink]="['/home']">Supply Vortex International</a>
         </div>
 
         <a *ngIf="isAuthenticated" class="btn dropdown-toggle flex" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

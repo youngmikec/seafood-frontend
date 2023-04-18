@@ -11,8 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import {
   DEFAULT_TIMEOUT,
@@ -49,6 +49,7 @@ import { WalletManagerComponent } from './home/wallet/wallet-manager/wallet-mana
 import { ProfileComponent } from './home/profile/profile.component';
 import { OfficesComponent } from './home/offices/offices.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
+import { SolutionComponent } from './home/solution/solution.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { AboutUsComponent } from './home/about-us/about-us.component';
     ProfileComponent,
     OfficesComponent,
     AboutUsComponent,
+    SolutionComponent,
   ],
   imports: [
     CommonModule,

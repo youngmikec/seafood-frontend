@@ -1,27 +1,42 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/home']">Turah International</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" [routerLink]="['/home']">Supply Vortex</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse flex justify-content-between" id="navbarSupportedContent">
       <div>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['/offices']" routerLinkActive="router-link-active">Our Offices</a>
+            <a class="nav-link" [routerLink]="['/blogs']" routerLinkActive="router-link-active">Blogs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/about-us']" routerLinkActive="router-link-active" >About Us</a>
+            <a class="nav-link" [routerLink]="['/about-us']" routerLinkActive="router-link-active">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" [routerLink]="['/solutions']" routerLinkActive="router-link-active"
+              id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Solution
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 20;">
+              <a class="dropdown-item" [routerLink]="['/solutions']" routerLinkActive="router-link-active">Delivery</a>
+              <a class="dropdown-item" [routerLink]="['/solutions']"
+                routerLinkActive="router-link-active">Agircultural</a>
+              <a class="dropdown-item" [routerLink]="['/solutions']" routerLinkActive="router-link-active">Trucking &
+                Logistics</a>
+              <div class="dropdown-divider"></div>
+            </div>
           </li>
         </ul>
       </div>
-  
+
       <div>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown" *ngIf="!isAuthenticated">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
               Account
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 20;">
@@ -32,9 +47,10 @@
           </li>
 
           <li class="nav-item dropdown" *ngIf="isAuthenticated">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
               <!-- <span class="mx-3">{{ user?.surname }} {{ user?.firstName }}</span> -->
-              <img [src]="user?.image || defaultAvatar" class="rounded-circle" width="40rem"  alt="">
+              <img [src]="user?.image || defaultAvatar" class="rounded-circle" width="40rem" alt="">
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 20;">
               <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">
@@ -52,11 +68,10 @@
               </a>
             </div>
           </li>
-          
+
         </ul>
       </div>
-  
+
     </div>
   </div>
 </nav>
-

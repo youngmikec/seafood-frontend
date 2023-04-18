@@ -31,7 +31,7 @@ export class AuthService {
     const response = this.http.post(`${this.env.API_URL}${data.userType === 'ADMIN' ? '/admin/login' : '/user/login' }`, payload)
       .pipe(tap((res: LoginResponse) => {
         if (res.success) {
-          this.showNotification(`${res.message}l<br/>Welcome! Turah International Logistics`);
+          this.showNotification(`${res.message}l<br/>Welcome! Supply Vortex International Logistics`);
           const { user, token } = res.payload;
           this.user = user;
           this.token = token;

@@ -1,8 +1,9 @@
 {
-  "name": "Turah International Logistic frontend",
-  "version": "0.0.0",
+  "name": "turah-international-logistic-frontend",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
+    "dev": "ng serve",
     "start": "node server.js",
     "build": "ng build --output-path dist",
     "heroku-postbuild": "ng build --configuration=production --output-path dist",
